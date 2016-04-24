@@ -1,7 +1,6 @@
 LearnWords
 ==========
 
-Learn Words<br>
 One page app for words learning by Leitner system. Single developer.<br>
 Developed with Twitter Bootstrap and jQuery. Responsive design, local storage,<br>
 hashtag navigation, HTML-templates, localization.<br>
