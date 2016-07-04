@@ -1,11 +1,12 @@
-LearnWords
-==========
-
-Learn Words<br>
+## Learn Words
 One page app for words learning by Leitner system. Single developer.<br>
 Developed with Twitter Bootstrap and jQuery. Responsive design, local storage,<br>
 hashtag navigation, HTML-templates, localization.<br>
-coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014<br>
-http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com<br>
-Placed in public domain.<br>
-Live: http://e1r0nd.github.io/LearnWords/
+coded by Anatol Marezhanyi aka e1r0nd//[CRG] - March 2014<br>
+http://linkedin.com/in/merezhany/ a.merezhanyi@gmail.com<br>
+
+## Demo
+http://e1r0nd.github.io/LearnWords/
+
+## License
+[MIT License](LICENSE.md)
