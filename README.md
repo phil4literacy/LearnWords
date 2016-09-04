@@ -7,7 +7,7 @@ Developed with Twitter Bootstrap and jQuery. Responsive design, local storage, h
 coded by Anatol Marezhanyi aka e1r0nd//[CRG]
 
 http://linkedin.com/in/merezhany/<br>
-e1r0nd.crg@gmail.com
+a.merezhanyi@gmail.com
 
 IS ON HOLD.
 
