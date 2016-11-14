@@ -25,7 +25,7 @@ a.merezhanyi@gmail.com
 
 The app allows the user to enter data but as well comes with some English-German words preloaded. This is defined in the file ``memorystore.js``. If you want to preload the app with your own words you have to create a file ``memorystore.js``.
 
-[Instructions how to create your own memorystore.js file](Notes.md)
+[Instructions how to create your own memorystore.js file](docs/Notes.md)
 
 
 ## License
