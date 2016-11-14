@@ -4,6 +4,11 @@
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
 **************************************************/
+
+var LW = {}; // global LearnWords object
+
+
+
 if(typeof(Utils) == 'undefined' || Utils == null || !Utils){
 	
 	Utils = {
@@ -64,9 +69,9 @@ if(typeof(Utils) == 'undefined' || Utils == null || !Utils){
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
 **************************************************/
-if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localStorageAPI){
+if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 	
-	localStorageAPI = {
+	LW.wdsDB = {
 	
 		isLocalStorageAvailable: function() {
 				try {
@@ -77,19 +82,19 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 			},
 		
 		readItem: function(key){
-			if (localStorageAPI.isOK) {
+			if (LW.wdsDB.isOK) {
 				return JSON.parse(localStorage.getItem( key ));
 			}
 		},
 		
 		removeItem: function(key){
-			if (localStorageAPI.isOK) {
+			if (LW.wdsDB.isOK) {
 				localStorage.removeItem( key );
 			}
 		},
 		
 		storeItem: function(key, value){
-			if (localStorageAPI.isOK) {
+			if (LW.wdsDB.isOK) {
 				try {
 					localStorage.setItem(key, JSON.stringify(value));
 				} catch (e) {
@@ -102,16 +107,16 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 		},
 		
 		init: function(){
-			localStorageAPI.isOK = false;
-			if (!localStorageAPI.isLocalStorageAvailable()) {
+			LW.wdsDB.isOK = false;
+			if (!LW.wdsDB.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
 			}
-			localStorageAPI.isOK = true;
+			LW.wdsDB.isOK = true;
 		}
 	};
 	
-	localStorageAPI.init();
+	LW.wdsDB.init();
 }
 
 /**************************************************
@@ -122,18 +127,18 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
 **************************************************/
-if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 'undefined' || localStorageAPI.readItem('learnWords-settings') == null)) {
+if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' || LW.wdsDB.readItem('learnWords-settings') == null)) {
 	settings = {
 		first : 1,
 		second: 3,
 		third: 7
 	};
-	localStorageAPI.storeItem('learnWords-settings', settings);
+	LW.wdsDB.storeItem('learnWords-settings', settings);
 	
-	localStorageAPI.storeItem('learnWords-language', 'en_GB');
+	LW.wdsDB.storeItem('learnWords-language', 'en_GB');
 	
 	var words = ['index1', 'index2', 'index3', 'index4', 'index5', 'index6', 'index7', 'index8', 'index9', 'index10', 'index11', 'index12', 'index13', 'index14'];
-	localStorageAPI.storeItem('learnWords-words', words.join());
+	LW.wdsDB.storeItem('learnWords-words', words.join());
 	
 	index1 = {
 		index: 'index1',
@@ -142,7 +147,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index1', index1);
+	LW.wdsDB.storeItem('learnWords-index1', index1);
 	
 	index2 = {
 		index: 'index2',
@@ -151,7 +156,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index2', index2);
+	LW.wdsDB.storeItem('learnWords-index2', index2);
 
 	index3 = {	
 		index: 'index3',
@@ -160,7 +165,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index3', index3);
+	LW.wdsDB.storeItem('learnWords-index3', index3);
 	
 	index4 = {	
 		index: 'index4',
@@ -169,7 +174,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index4', index4);
+	LW.wdsDB.storeItem('learnWords-index4', index4);
 	
 	index5 = {
 		index: 'index5',
@@ -178,7 +183,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index5', index5);
+	LW.wdsDB.storeItem('learnWords-index5', index5);
 	
 	index6 = {
 		index: 'index6',
@@ -187,7 +192,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index6', index6);
+	LW.wdsDB.storeItem('learnWords-index6', index6);
 	
 	index7 = {
 		index: 'index7',
@@ -196,7 +201,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index7', index7);
+	LW.wdsDB.storeItem('learnWords-index7', index7);
 	
 	index8 = {
 		index: 'index8',
@@ -205,7 +210,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 0,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index8', index8);
+	LW.wdsDB.storeItem('learnWords-index8', index8);
 	
 	index9 = {
 		index: 'index9',
@@ -214,7 +219,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 1,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index9', index9);
+	LW.wdsDB.storeItem('learnWords-index9', index9);
 	
 	index10 = {
 		index: 'index10',
@@ -223,7 +228,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 1,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index10', index10);
+	LW.wdsDB.storeItem('learnWords-index10', index10);
 	
 	index11 = {
 		index: 'index11',
@@ -232,7 +237,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 1,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index11', index11);
+	LW.wdsDB.storeItem('learnWords-index11', index11);
 	
 	index12 = {
 		index: 'index12',
@@ -241,7 +246,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 2,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index12', index12);
+	LW.wdsDB.storeItem('learnWords-index12', index12);
 	
 	index13 = {
 		index: 'index13',
@@ -250,7 +255,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 2,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index13', index13);
+	LW.wdsDB.storeItem('learnWords-index13', index13);
 	
 	index14 = {
 		index: 'index14',
@@ -259,7 +264,7 @@ if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 
 		step: 3,
 		date: 0
 	};
-	localStorageAPI.storeItem('learnWords-index14', index14);
+	LW.wdsDB.storeItem('learnWords-index14', index14);
 	
 	console.log(localStorage);
 }/**************************************************
@@ -437,13 +442,13 @@ if(typeof(local) == 'undefined' || local == null || !local){
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
 			local.changeLocalContent();
-			localStorageAPI.storeItem('learnWords-language', local.currentLocal);
+			LW.wdsDB.storeItem('learnWords-language', local.currentLocal);
 			$(this).addClass('selected');
 			return false;
 		},
 		
 		init: function(){
-			local.currentLocal = localStorageAPI.readItem('learnWords-language');
+			local.currentLocal = LW.wdsDB.readItem('learnWords-language');
 			$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
 		}
 	}
@@ -468,7 +473,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 		params: {},
 	
 		getSettings: function(){ //read setting's values
-			var settings = localStorageAPI.readItem('learnWords-settings');
+			var settings = LW.wdsDB.readItem('learnWords-settings');
 			
 			$(Settings.inputFirstCheck).val(settings.first);
 			$(Settings.inputSecondCheck).val(settings.second);
@@ -519,7 +524,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 					second: second,
 					third: third
 				};
-				localStorageAPI.storeItem('learnWords-settings', settings);
+				LW.wdsDB.storeItem('learnWords-settings', settings);
 				$(Settings.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
 				
 				Settings.params = settings; //store local
@@ -573,7 +578,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 		translates: [],
 		
 		recountTotal: function(){
-			$(Vocabulary.totalWordsNum).text(wordsIndex.length);
+			$(Vocabulary.totalWordsNum).text(LW.wdsDB.index.length);
 		},
 		
 		removeWord: function(self, notReindex){ //remove word from vocabulary
@@ -581,10 +586,10 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				node = $(self).data('node');
 			
 			if (!notReindex) {
-				wordsIndex.splice(id, 1); //remove from index
-				localStorageAPI.storeItem('learnWords-words', wordsIndex.join());
+				LW.wdsDB.index.splice(id, 1); //remove from index
+				LW.wdsDB.storeItem('learnWords-words', LW.wdsDB.index.join());
 			}
-			localStorageAPI.removeItem('learnWords-'+node); //remove this word
+			LW.wdsDB.removeItem('learnWords-'+node); //remove this word
 			$('#'+node).remove();
 			$('#'+node+'Edit').remove();
 			Vocabulary.recountTotal();
@@ -604,8 +609,8 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 		viewWord: function(){
 			var contentInner = '';
 			
-			$(wordsIndex).each(function(index, node){
-				var item = localStorageAPI.readItem('learnWords-'+node),
+			$(LW.wdsDB.index).each(function(index, node){
+				var item = LW.wdsDB.readItem('learnWords-'+node),
 					txt = item.word,
 					translate = item.translate;
 				
@@ -644,11 +649,11 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 					step: 0,
 					date: 0
 				};
-				localStorageAPI.storeItem('learnWords-'+todayDate, word); //save word
-				contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? wordsIndex.length : wordsIndex.indexOf(inputWord));
+				LW.wdsDB.storeItem('learnWords-'+todayDate, word); //save word
+				contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? LW.wdsDB.index.length : LW.wdsDB.index.indexOf(inputWord));
 				
 				if (addWord) {
-					wordsIndex.push(todayDate);
+					LW.wdsDB.index.push(todayDate);
 					wordTxt.val('');
 					translate.val('');
 					$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
@@ -657,12 +662,12 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				} else {
 					var id = wordTxt.attr('id').slice(5);
 					
-					wordsIndex[wordsIndex.indexOf(id)] = todayDate;
+					LW.wdsDB.index[LW.wdsDB.index.indexOf(id)] = todayDate;
 					$('#' + id).before(contentInner);
 					Vocabulary.removeWord($('#del-' + id), true);
 				}
 				
-				localStorageAPI.storeItem('learnWords-words', wordsIndex.join()); //add word to Vocabulary list
+				LW.wdsDB.storeItem('learnWords-words', LW.wdsDB.index.join()); //add word to Vocabulary list
 				Utils.clearFields();
 				Vocabulary.recountTotal();
 				Learn.wordsLearn = [];
@@ -716,8 +721,8 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 		
 		recountIndexLearn: function(){ //count words to learn
 			if (!Learn.wordsLearn.length) {
-				$(wordsIndex).each(function(index, node){ //the initial counting
-					var item = localStorageAPI.readItem('learnWords-'+node);
+				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
+					var item = LW.wdsDB.readItem('learnWords-'+node);
 					if (item.step == 0) {
 						Learn.wordsLearn.push(item);
 					}
@@ -753,7 +758,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 						date: (step == 1) ? (Utils.getToday() + 864000000 * Settings.params.first) : 0
 					};
 				
-				localStorageAPI.storeItem('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
+				LW.wdsDB.storeItem('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
 				
 				if (reindex) {
 					Learn.wordsLearn.splice(Learn.currentIndex, 1); //remove from index
@@ -821,8 +826,8 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		
 		recountIndexRepeat: function(){ //count words to Repeat
 			if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
-				$(wordsIndex).each(function(index, node){ //the initial counting
-					var item = localStorageAPI.readItem('learnWords-'+node);
+				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
+					var item = LW.wdsDB.readItem('learnWords-'+node);
 					
 					if (Utils.getToday() > item.date) { //if this word is for today
 						if (item.step == 1) {
@@ -898,7 +903,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			if (step) {
 				
 				
-				localStorageAPI.storeItem('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
+				LW.wdsDB.storeItem('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
 				
 				if (reindex) {
 					Repeat.wordsRepeat.splice(Repeat.currentIndex, 1); //remove from index
@@ -931,7 +936,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step--;
 				word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + 864000000 * Settings.params.first;
 			}
-			localStorageAPI.storeItem('learnWords-'+word.index, word); //save word
+			LW.wdsDB.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();
@@ -954,7 +959,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step--;
 				word.date = Utils.getToday() + 864000000 * Settings.params.second;
 			};
-			localStorageAPI.storeItem('learnWords-'+word.index, word); //save word
+			LW.wdsDB.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat.third.splice(0, 1); //remove from index
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();
@@ -989,7 +994,8 @@ if (local.currentLocal != $('[data-type=lang-select].selected').data('lang')) {
 };
 
 // read vocabulary
-var wordsIndex = localStorageAPI.readItem('learnWords-words').split(',');
+
+LW.wdsDB.index = LW.wdsDB.readItem('learnWords-words').split(',');
 Vocabulary.viewWord();
 Learn.recountIndexLearn();
 Learn.showWord();
