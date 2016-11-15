@@ -146,22 +146,124 @@ var theWords = [
 
 ## Step 3
 
-````JavaScript
-"index": "index"+index,
-"step": 0,
-"date": 0
-````
+Add code to initialize the missing attributes of the words and load them into the localStorage.
 
+````JavaScript
+
+/*
+ * This is a JavaScript Scratchpad.
+ *
+ * Enter some JavaScript, then Right Click or choose from the Execute Menu:
+ * 1. Run to evaluate the selected text (Ctrl+R),
+ * 2. Inspect to bring up an Object Inspector on the result (Ctrl+I), or,
+ * 3. Display to insert the result in a comment after the selection. (Ctrl+L)
+ */
+
+var theWords = [
+  {
+    "word": "Apfel",
+    "translate": "apple"
+  },
+  {
+    "word": "Orange",
+    "translate": "orange"
+  },
+  {
+    "word": "Papaya",
+    "translate": "pawpaw"
+  },
+  {
+    "word": "Himbeeren",
+    "translate": "raspberry"
+  },
+  {
+    "word": "Erdbeeren",
+    "translate": "strawberry"
+  },
+  {
+    "word": "Aprikose",
+    "translate": "apricot"
+  },
+  {
+    "word": "Kokosnuss",
+    "translate": "coconut"
+  },
+  {
+    "word": "Birne",
+    "translate": "pear"
+  },
+  {
+    "word": "Ananas",
+    "translate": "pineapple"
+  },
+  {
+    "word": "Guava",
+    "translate": "guava"
+  },
+  {
+    "word": "Banane",
+    "translate": "banana"
+  },
+  {
+    "word": "Melone",
+    "translate": "melon"
+  },
+  {
+    "word": "Zitrone",
+    "translate": "lemon"
+  },
+  {
+    "word": "Pflaume",
+    "translate": "plum"
+  },
+  {
+    "word": "Traube",
+    "translate": "grape"
+  },
+  {
+    "word": "Mango",
+    "translate": "mango"
+  },
+  {
+    "word": "Limette",
+    "translate": "lime"
+  },
+  {
+    "word": "Kirsche",
+    "translate": "cherry"
+  },
+  {
+    "word": "Kiwi",
+    "translate": "kiwi"
+  },
+  {
+    "word": "Heidelbeere",
+    "translate": "blueberry"
+  },
+  {
+    "word": "Brombeere",
+    "translate": "blackberry"
+  }
+];
+
+var i= 0;
+var arrayOfKeys = [];
+
+theWords.forEach(function(element){
+  i = i + 1;
+  element.index = "index"+i;
+  element.step = 0;
+  element.date = 0;
+  localStorageAPI.storeItem('learnWords-'+element.index, element);
+  arrayOfKeys.push(element.index);
+});
+
+// TODO add code to store arrayOfKeys
+
+````
 
 ## Step 4
 
-````JavaScript
-forEach(item, index) do:
-
-localStorageAPI.storeItem('learnWords-'+item.index, item);
-````
-
-
-## Step 5
-
 Save the code thus created as a new ``memorystore.js`` file
+
+TODO: check for the settings and initialize them.
