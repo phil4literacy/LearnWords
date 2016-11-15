@@ -495,6 +495,25 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			}
 			Repeat.showWord(Repeat.currentIndex);
 		},
+
+
+
+                MoveWordToOtherBoxAndGiveFeedback: function(word,answer) {
+
+			if (answer == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
+				word.step++;
+				word.date = LW.Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
+			} else {
+				word.step--;
+				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
+			};
+
+			//save word
+			LW.wdsDB.put('learnWords-'+word.index, word);
+		},
+
+
+
 		
 		checkWord: function(self){
 			var word = {
@@ -503,16 +522,15 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 					translate: Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].translate,
 					step: Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].step,
 				};
-			
-			if ($(self).text() == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
-				word.step++;
-				word.date = LW.Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
-			} else {
-				word.step--;
-				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
-			}
-			LW.wdsDB.put('learnWords-'+word.index, word); //save word
-			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
+
+			Repeat.MoveWordToOtherBoxAndGiveFeedback(word,$(self).text());
+
+                        //remove word from word keys index
+			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); 
+
+                        // recalculate indexes for Learn box (step 0) and 
+                        // Repeat box (steps 1 .. 3)
+
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();
 			Learn.showWord();
