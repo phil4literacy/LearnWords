@@ -1,12 +1,18 @@
 /**************************************************
-* Learn Words // utils.js
+* Learn Words // Utils.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+*
+* Updates November 2016 by Hannes Hirzel
+*
 * Placed in public domain.
 **************************************************/
-if(typeof(Utils) == 'undefined' || Utils == null || !Utils){
+
+
+
+if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
 	
-	Utils = {
+	LW.Utils = {
 	
 		isNumber: function(str, withDot){ //validate filed for number value
 			var NumberReg = /^\d+$/,
