@@ -381,6 +381,24 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		noWordsRepeat: $('#noWordsRepeat'),
 		enterBtn: $('#enterBtn'),
 		
+		answerWasCorrectFeedback: function(correct)
+		{
+			$('#feedback').show();
+			
+			var answerType = "wrong";
+			if(correct)
+			{
+				answerType = "correct";
+			}
+			$('#feedback').html('<img src="media/symbols/' + answerType + '.png">');
+			var audio = new Audio('media/sound/' + answerType + '.mp3');
+			audio.play();
+
+			return true;
+		},
+
+
+
 		recountIndexRepeat: function(){ //count words to Repeat
 			if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
 				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
