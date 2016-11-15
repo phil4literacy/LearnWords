@@ -8,8 +8,6 @@
 * Placed in public domain.
 **************************************************/
 
-var LW = {}; // global LearnWords object
-
 
 
 if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
