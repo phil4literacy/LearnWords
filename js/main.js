@@ -4,19 +4,24 @@
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
 **************************************************/
-// read settings
+
+
+// Read the settings
 Settings.getSettings();
 
-// set user saved local
-if (local.currentLocal != $('[data-type=lang-select].selected').data('lang')) {
-	$('[data-lang='+local.currentLocal+']').click();
+// Set the user saved local
+if (LW.local.current != $('[data-type=lang-select].selected').data('lang')) {
+	$('[data-lang='+LW.local.current+']').click();
 };
 
-// read vocabulary
-var wordsIndex = localStorageAPI.readItem('learnWords-words').split(',');
+// Read vocabulary
+
+LW.wdsDB.index = LW.wdsDB.get('learnWords-words').split(',');
+
 Vocabulary.viewWord();
 Learn.recountIndexLearn();
 Learn.showWord();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
-Utils.closeMobMenu();
+
+LW.Utils.closeMobMenu();
