@@ -89,14 +89,30 @@
 	</div>
 	
 	<div id="repeat" data-toggle="nav" class="center nodisplay">
+
 		<div id="checkWord" class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<h3 id="checkWordInp" data-id="" data-direction=""></h3>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
-				<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+				<div class="row row-content">
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+				</div>
+				<div class="row row-content" style="margin-top:10px;">
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+					<div class="col-xs-6">
+						<button data-type="checkWordBtn" type="button" class="btn btn-info btn-block"></button>
+					</div>
+				</div>
+				<div id=feedback></div>
 			</div>
 		</div>
+
 		<div id="enterWord" class="row nodisplay">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="form-group">
