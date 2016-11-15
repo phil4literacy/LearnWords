@@ -52,6 +52,18 @@ if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
 				$('#navbarToggle').click();
 			}
 		},
+
+
+		dump: function(obj) {
+		    var out = '';
+		    for (var i in obj) {
+		        out += i + ": " + obj[i] + "|\n";
+		    }
+		    
+		    console.log(out);
+		},	
+
+
 		shuffle: function(a) {
 			 var j, x, i;
 		    for (i = a.length; i; i--) {
