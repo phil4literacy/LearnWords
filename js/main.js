@@ -25,11 +25,6 @@
 ***************************************************************/
 
 
-// Define global LearnWords object
-var LW = {}; 
-
-
-
 
 // Read the settings
 //
