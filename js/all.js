@@ -2,6 +2,9 @@
 * Learn Words // Utils.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+*
+* Updates November 2016 by Hannes Hirzel
+*
 * Placed in public domain.
 **************************************************/
 
@@ -81,19 +84,19 @@ if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 				}
 			},
 		
-		readItem: function(key){
+		get: function(key){
 			if (LW.wdsDB.isOK) {
-				return JSON.parse(localStorage.getItem( key ));
+				return JSON.parse(localStorage.getItem(key));
 			}
 		},
 		
-		removeItem: function(key){
+		remove: function(key){
 			if (LW.wdsDB.isOK) {
 				localStorage.removeItem( key );
 			}
 		},
 		
-		storeItem: function(key, value){
+		put: function(key, value){
 			if (LW.wdsDB.isOK) {
 				try {
 					localStorage.setItem(key, JSON.stringify(value));
@@ -133,7 +136,7 @@ if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 			});
 
                         // reset index
-                        LW.wdsDB.storeItem('learnWords-words', '');
+                        LW.wdsDB.put('learnWords-words', '');
 
                         // maybe this as well
                         localStorage.removeItem('learnWords-settings');
@@ -163,18 +166,18 @@ if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
 **************************************************/
-if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' || LW.wdsDB.readItem('learnWords-settings') == null)) {
+if (LW.wdsDB.isOK && (LW.wdsDB.get('learnWords-settings') == 'undefined' || LW.wdsDB.get('learnWords-settings') == null)) {
 	settings = {
 		first : 1,
 		second: 3,
 		third: 7
 	};
-	LW.wdsDB.storeItem('learnWords-settings', settings);
+	LW.wdsDB.put('learnWords-settings', settings);
 	
-	LW.wdsDB.storeItem('learnWords-language', 'en_GB');
+	LW.wdsDB.put('learnWords-language', 'en_GB');
 	
 	var words = ['index1', 'index2', 'index3', 'index4', 'index5', 'index6', 'index7', 'index8', 'index9', 'index10', 'index11', 'index12', 'index13', 'index14'];
-	LW.wdsDB.storeItem('learnWords-words', words.join());
+	LW.wdsDB.put('learnWords-words', words.join());
 	
 	index1 = {
 		index: 'index1',
@@ -183,7 +186,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index1', index1);
+	LW.wdsDB.put('learnWords-index1', index1);
 	
 	index2 = {
 		index: 'index2',
@@ -192,7 +195,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index2', index2);
+	LW.wdsDB.put('learnWords-index2', index2);
 
 	index3 = {	
 		index: 'index3',
@@ -201,7 +204,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index3', index3);
+	LW.wdsDB.put('learnWords-index3', index3);
 	
 	index4 = {	
 		index: 'index4',
@@ -210,7 +213,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index4', index4);
+	LW.wdsDB.put('learnWords-index4', index4);
 	
 	index5 = {
 		index: 'index5',
@@ -219,7 +222,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index5', index5);
+	LW.wdsDB.put('learnWords-index5', index5);
 	
 	index6 = {
 		index: 'index6',
@@ -228,7 +231,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index6', index6);
+	LW.wdsDB.put('learnWords-index6', index6);
 	
 	index7 = {
 		index: 'index7',
@@ -237,7 +240,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index7', index7);
+	LW.wdsDB.put('learnWords-index7', index7);
 	
 	index8 = {
 		index: 'index8',
@@ -246,7 +249,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 0,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index8', index8);
+	LW.wdsDB.put('learnWords-index8', index8);
 	
 	index9 = {
 		index: 'index9',
@@ -255,7 +258,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 1,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index9', index9);
+	LW.wdsDB.put('learnWords-index9', index9);
 	
 	index10 = {
 		index: 'index10',
@@ -264,7 +267,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 1,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index10', index10);
+	LW.wdsDB.put('learnWords-index10', index10);
 	
 	index11 = {
 		index: 'index11',
@@ -273,7 +276,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 1,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index11', index11);
+	LW.wdsDB.put('learnWords-index11', index11);
 	
 	index12 = {
 		index: 'index12',
@@ -282,7 +285,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 2,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index12', index12);
+	LW.wdsDB.put('learnWords-index12', index12);
 	
 	index13 = {
 		index: 'index13',
@@ -291,7 +294,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 2,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index13', index13);
+	LW.wdsDB.put('learnWords-index13', index13);
 	
 	index14 = {
 		index: 'index14',
@@ -300,7 +303,7 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 		step: 3,
 		date: 0
 	};
-	LW.wdsDB.storeItem('learnWords-index14', index14);
+	LW.wdsDB.put('learnWords-index14', index14);
 	
 	console.log(localStorage);
 }/**************************************************
@@ -478,13 +481,13 @@ if(typeof(LW.local) == 'undefined' || LW.local == null || !LW.local){
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
 			LW.local.changeLocalContent();
-			LW.wdsDB.storeItem('learnWords-language', LW.local.current);
+			LW.wdsDB.put('learnWords-language', LW.local.current);
 			$(this).addClass('selected');
 			return false;
 		},
 		
 		init: function(){
-			LW.local.current = LW.wdsDB.readItem('learnWords-language');
+			LW.local.current = LW.wdsDB.get('learnWords-language');
 			$(document).on('click touchstart', '[data-type=lang-select]', LW.local.langSelect);
 		}
 	}
@@ -509,7 +512,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 		params: {},
 	
 		getSettings: function(){ //read setting's values
-			var settings = LW.wdsDB.readItem('learnWords-settings');
+			var settings = LW.wdsDB.get('learnWords-settings');
 			
 			$(Settings.inputFirstCheck).val(settings.first);
 			$(Settings.inputSecondCheck).val(settings.second);
@@ -560,7 +563,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 					second: second,
 					third: third
 				};
-				LW.wdsDB.storeItem('learnWords-settings', settings);
+				LW.wdsDB.put('learnWords-settings', settings);
 				$(Settings.errorSettings).removeClass('nodisplay').text(LW.local[LW.local.current].errorNo);
 				
 				Settings.params = settings; //store local
@@ -623,9 +626,9 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 			
 			if (!notReindex) {
 				LW.wdsDB.index.splice(id, 1); //remove from index
-				LW.wdsDB.storeItem('learnWords-words', LW.wdsDB.index.join());
+				LW.wdsDB.put('learnWords-words', LW.wdsDB.index.join());
 			}
-			LW.wdsDB.removeItem('learnWords-'+node); //remove this word
+			LW.wdsDB.remove('learnWords-'+node); //remove this word
 			$('#'+node).remove();
 			$('#'+node+'Edit').remove();
 			Vocabulary.recountTotal();
@@ -646,7 +649,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 			var contentInner = '';
 			
 			$(LW.wdsDB.index).each(function(index, node){
-				var item = LW.wdsDB.readItem('learnWords-'+node),
+				var item = LW.wdsDB.get('learnWords-'+node),
 					txt = item.word,
 					translate = item.translate;
 				
@@ -685,7 +688,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 					step: 0,
 					date: 0
 				};
-				LW.wdsDB.storeItem('learnWords-'+todayDate, word); //save word
+				LW.wdsDB.put('learnWords-'+todayDate, word); //save word
 				contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? LW.wdsDB.index.length : LW.wdsDB.index.indexOf(inputWord));
 				
 				if (addWord) {
@@ -703,7 +706,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 					Vocabulary.removeWord($('#del-' + id), true);
 				}
 				
-				LW.wdsDB.storeItem('learnWords-words', LW.wdsDB.index.join()); //add word to Vocabulary list
+				LW.wdsDB.put('learnWords-words', LW.wdsDB.index.join()); //add word to Vocabulary list
 				LW.Utils.clearFields();
 				Vocabulary.recountTotal();
 				Learn.wordsLearn = [];
@@ -758,7 +761,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 		recountIndexLearn: function(){ //count words to learn
 			if (!Learn.wordsLearn.length) {
 				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
-					var item = LW.wdsDB.readItem('learnWords-'+node);
+					var item = LW.wdsDB.get('learnWords-'+node);
 					if (item.step == 0) {
 						Learn.wordsLearn.push(item);
 					}
@@ -794,7 +797,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 						date: (step == 1) ? (LW.Utils.getToday() + 864000000 * Settings.params.first) : 0
 					};
 				
-				LW.wdsDB.storeItem('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
+				LW.wdsDB.put('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
 				
 				if (reindex) {
 					Learn.wordsLearn.splice(Learn.currentIndex, 1); //remove from index
@@ -863,7 +866,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		recountIndexRepeat: function(){ //count words to Repeat
 			if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
 				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
-					var item = LW.wdsDB.readItem('learnWords-'+node);
+					var item = LW.wdsDB.get('learnWords-'+node);
 					
 					if (LW.Utils.getToday() > item.date) { //if this word is for today
 						if (item.step == 1) {
@@ -939,7 +942,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			if (step) {
 				
 				
-				LW.wdsDB.storeItem('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
+				LW.wdsDB.put('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
 				
 				if (reindex) {
 					Repeat.wordsRepeat.splice(Repeat.currentIndex, 1); //remove from index
@@ -972,7 +975,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step--;
 				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
 			}
-			LW.wdsDB.storeItem('learnWords-'+word.index, word); //save word
+			LW.wdsDB.put('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();
@@ -995,7 +998,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step--;
 				word.date = LW.Utils.getToday() + 864000000 * Settings.params.second;
 			};
-			LW.wdsDB.storeItem('learnWords-'+word.index, word); //save word
+			LW.wdsDB.put('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat.third.splice(0, 1); //remove from index
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();
@@ -1031,7 +1034,7 @@ if (LW.local.current != $('[data-type=lang-select].selected').data('lang')) {
 
 // read vocabulary
 
-LW.wdsDB.index = LW.wdsDB.readItem('learnWords-words').split(',');
+LW.wdsDB.index = LW.wdsDB.get('learnWords-words').split(',');
 Vocabulary.viewWord();
 Learn.recountIndexLearn();
 Learn.showWord();
