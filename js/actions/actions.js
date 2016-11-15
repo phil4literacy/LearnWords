@@ -381,6 +381,24 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		noWordsRepeat: $('#noWordsRepeat'),
 		enterBtn: $('#enterBtn'),
 		
+		answerWasCorrectFeedback: function(correct)
+		{
+			$('#feedback').show();
+			
+			var answerType = "wrong";
+			if(correct)
+			{
+				answerType = "correct";
+			}
+			$('#feedback').html('<img src="media/symbols/' + answerType + '.png">');
+			var audio = new Audio('media/sound/' + answerType + '.mp3');
+			audio.play();
+
+			return true;
+		},
+
+
+
 		recountIndexRepeat: function(){ //count words to Repeat
 			if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
 				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
@@ -477,6 +495,27 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			}
 			Repeat.showWord(Repeat.currentIndex);
 		},
+
+
+
+                MoveWordToOtherBoxAndGiveFeedback: function(word,answer) {
+
+			if (answer == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
+                                Repeat.answerWasCorrectFeedback(true);
+				word.step++;  // put word into next box
+				word.date = LW.Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
+			} else {
+                                Repeat.answerWasCorrectFeedback(true);
+				word.step--;  
+				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
+			};
+
+			//save word
+			LW.wdsDB.put('learnWords-'+word.index, word);
+		},
+
+
+
 		
 		checkWord: function(self){
 			var word = {
@@ -485,21 +524,26 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 					translate: Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].translate,
 					step: Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0].step,
 				};
-			
-			if ($(self).text() == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
-				word.step++;
-				word.date = LW.Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
-			} else {
-				word.step--;
-				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
-			}
-			LW.wdsDB.put('learnWords-'+word.index, word); //save word
-			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
-			Learn.wordsLearn = [];
-			Learn.recountIndexLearn();
-			Learn.showWord();
-			Repeat.recountIndexRepeat();
-			Repeat.showWord();
+
+			Repeat.MoveWordToOtherBoxAndGiveFeedback(word,$(self).text());
+
+
+			setTimeout(function () {
+				$('#feedback').hide();
+
+                                //remove word from word keys index
+				Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); 
+
+                                // recalculate indexes for Learn box (step 0) and 
+                                // Repeat boxes (steps 1 .. 3)
+				Learn.wordsLearn = [];
+				Learn.recountIndexLearn();
+				Learn.showWord();
+				Repeat.recountIndexRepeat();
+				Repeat.showWord();
+			}, 2000);
+
+
 		},
 		
 		repeatWord: function(){
