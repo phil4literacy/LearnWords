@@ -1,5 +1,5 @@
 /**************************************************
-* Learn Words // utils.js
+* Learn Words // Utils.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
@@ -9,9 +9,9 @@ var LW = {}; // global LearnWords object
 
 
 
-if(typeof(Utils) == 'undefined' || Utils == null || !Utils){
+if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
 	
-	Utils = {
+	LW.Utils = {
 	
 		isNumber: function(str, withDot){ //validate filed for number value
 			var NumberReg = /^\d+$/,
@@ -64,7 +64,7 @@ if(typeof(Utils) == 'undefined' || Utils == null || !Utils){
 }
 
 /**************************************************
-* Learn Words // localdtorage.js
+* Learn Words // localstorage.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
@@ -305,13 +305,13 @@ if (LW.wdsDB.isOK && (LW.wdsDB.readItem('learnWords-settings') == 'undefined' ||
 	console.log(localStorage);
 }/**************************************************
 * Learn Words // navigation.js
-* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
-* http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+* Coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
+* 
 * Placed in public domain.
 **************************************************/
-if(typeof(Navigation) == 'undefined' || Navigation == null || !Navigation){
+if(typeof(LW.Navig) == 'undefined' || LW.Navig == null || !LW.Navig){
 	
-	Navigation = {
+	LW.Navig = {
 	
 		hashguard: function(init){ //onHashChange
 			if (init) this.hash = window.location.hash;
@@ -319,7 +319,7 @@ if(typeof(Navigation) == 'undefined' || Navigation == null || !Navigation){
 				$(window).trigger('hashbreak', {"prevhash":this.hash});
 				this.hash = window.location.hash;
 			}
-			setTimeout('Navigation.hashguard(false)', 50);
+			setTimeout('LW.Navig.hashguard(false)', 50);
 		},
 		
 		hashbreak: function(){ //hashchange event
@@ -341,17 +341,17 @@ if(typeof(Navigation) == 'undefined' || Navigation == null || !Navigation){
 			});
 			$(this).parent().addClass('active');
 			$('#'+$(this).data('target')).removeClass('nodisplay');
-			Utils.closeMobMenu();
+			LW.Utils.closeMobMenu();
 		},
 		
 		init: function(){
-			$(document).on('click touchstart', '[data-type=nav-select]', Navigation.navSelect);
-			$(window).bind('hashbreak', Navigation.hashbreak);
-			Navigation.hashguard(false);
+			$(document).on('click touchstart', '[data-type=nav-select]', LW.Navig.navSelect);
+			$(window).bind('hashbreak', LW.Navig.hashbreak);
+			LW.Navig.hashguard(false);
 		}
 	};
 	
-	Navigation.init();
+	LW.Navig.init();
 }
 
 ﻿/**************************************************
@@ -360,8 +360,8 @@ if(typeof(Navigation) == 'undefined' || Navigation == null || !Navigation){
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
 **************************************************/
-if(typeof(local) == 'undefined' || local == null || !local){
-	local = {
+if(typeof(LW.local) == 'undefined' || LW.local == null || !LW.local){
+	LW.local = {
 	
 		en_GB: {
 			summary: 'Summary',
@@ -466,7 +466,7 @@ if(typeof(local) == 'undefined' || local == null || !local){
 				langSelect = $('[data-type=lang-select]');
 			
 			$(langNode).each(function(i, node){
-				$(node).text(local[local.currentLocal][$(node).data('lang')]);
+				$(node).text(LW.local[LW.local.current][$(node).data('lang')]);
 			});
 			$(langSelect).each(function(i, node){
 				$(node).removeClass('selected');
@@ -474,22 +474,22 @@ if(typeof(local) == 'undefined' || local == null || !local){
 		},
 		
 		langSelect: function(){ //change localization
-			local.currentLocal = $(this).data('lang');
+			LW.local.current = $(this).data('lang');
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
-			local.changeLocalContent();
-			LW.wdsDB.storeItem('learnWords-language', local.currentLocal);
+			LW.local.changeLocalContent();
+			LW.wdsDB.storeItem('learnWords-language', LW.local.current);
 			$(this).addClass('selected');
 			return false;
 		},
 		
 		init: function(){
-			local.currentLocal = LW.wdsDB.readItem('learnWords-language');
-			$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
+			LW.local.current = LW.wdsDB.readItem('learnWords-language');
+			$(document).on('click touchstart', '[data-type=lang-select]', LW.local.langSelect);
 		}
 	}
 	
-	local.init();
+	LW.local.init();
 }/**************************************************
 * Learn Words // settings.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
@@ -526,33 +526,33 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 				errorName = '',
 				error = false;
 			
-			Utils.clearFields();
+			LW.Utils.clearFields();
 			//check for empty fields
 			if (!first) {
-				error = Utils.setFieldError(form.children(':nth-child(1)'));
+				error = LW.Utils.setFieldError(form.children(':nth-child(1)'));
 				errorName = 'empty';
 			} else if (!second) {
-				error = Utils.setFieldError(form.children(':nth-child(2)'));
+				error = LW.Utils.setFieldError(form.children(':nth-child(2)'));
 				errorName = 'empty';
 			} else if (!third) {
-				error = Utils.setFieldError(form.children(':nth-child(3)'));
+				error = LW.Utils.setFieldError(form.children(':nth-child(3)'));
 				errorName = 'empty';
 			} else { //only digits is valid
-				if (!Utils.isNumber(first)) {
-					error = Utils.setFieldError(form.children(':nth-child(1)'));
+				if (!LW.Utils.isNumber(first)) {
+					error = LW.Utils.setFieldError(form.children(':nth-child(1)'));
 					errorName = 'number';
 				};
-				if (!Utils.isNumber(second)) {
-					error = Utils.setFieldError(form.children(':nth-child(2)'));
+				if (!LW.Utils.isNumber(second)) {
+					error = LW.Utils.setFieldError(form.children(':nth-child(2)'));
 					errorName = 'number';
 				};
-				if (!Utils.isNumber(third)) {
-					error = Utils.setFieldError(form.children(':nth-child(3)'));
+				if (!LW.Utils.isNumber(third)) {
+					error = LW.Utils.setFieldError(form.children(':nth-child(3)'));
 					errorName = 'number';
 				};
 			}
 			if (error) { //show error if any
-				var errorTxt = (errorName == 'empty') ? local[local.currentLocal].errorEmpty : local[local.currentLocal].errorValid;
+				var errorTxt = (errorName == 'empty') ? LW.local[LW.local.current].errorEmpty : LW.local[LW.local.current].errorValid;
 				$(Settings.errorSettings).removeClass('nodisplay').text(errorTxt);
 			} else { //otherwise save new settings
 				settings = {
@@ -561,14 +561,14 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 					third: third
 				};
 				LW.wdsDB.storeItem('learnWords-settings', settings);
-				$(Settings.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
+				$(Settings.errorSettings).removeClass('nodisplay').text(LW.local[LW.local.current].errorNo);
 				
 				Settings.params = settings; //store local
 			};
 		},
 		
 		cancelSetting: function(){
-			Utils.clearFields();
+			LW.Utils.clearFields();
 			Settings.getSettings();
 		},
 		
@@ -666,18 +666,18 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				error = false,
 				word = {};
 			
-			Utils.clearFields();
+			LW.Utils.clearFields();
 			//check for empty fields
 			if (!inputWord) {
-				error = Utils.setFieldError(form.children(':nth-child(1)').children(':nth-child(1)'));
+				error = LW.Utils.setFieldError(form.children(':nth-child(1)').children(':nth-child(1)'));
 			} else if (!inputTranslate) {
-				error = Utils.setFieldError(form.children(':nth-child(2)').children(':nth-child(1)'));
+				error = LW.Utils.setFieldError(form.children(':nth-child(2)').children(':nth-child(1)'));
 			}
 			if (error) { //show error if any
 				$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
-				$(Vocabulary.errorVocabulary).text(local[local.currentLocal].errorEmpty);
+				$(Vocabulary.errorVocabulary).text(LW.local[LW.local.current].errorEmpty);
 			} else { //otherwise save new word to Vocabulary
-				var todayDate = Utils.getToday(true);
+				var todayDate = LW.Utils.getToday(true);
 				word = {
 					index: todayDate,
 					word : inputWord,
@@ -693,7 +693,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 					wordTxt.val('');
 					translate.val('');
 					$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
-					$(Vocabulary.errorVocabulary).text(local[local.currentLocal].errorNoW);
+					$(Vocabulary.errorVocabulary).text(LW.local[LW.local.current].errorNoW);
 					$(Vocabulary.vocabularyBox).append(contentInner);
 				} else {
 					var id = wordTxt.attr('id').slice(5);
@@ -704,7 +704,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				}
 				
 				LW.wdsDB.storeItem('learnWords-words', LW.wdsDB.index.join()); //add word to Vocabulary list
-				Utils.clearFields();
+				LW.Utils.clearFields();
 				Vocabulary.recountTotal();
 				Learn.wordsLearn = [];
 				Learn.recountIndexLearn();
@@ -778,7 +778,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 				$(learnWordsGrp).removeClass('nodisplay');
 				$(noWordsLeft).addClass('nodisplay');
 			} else {
-				$(allWordsOk).text(local[local.currentLocal].allWordsOk);
+				$(allWordsOk).text(LW.local[LW.local.current].allWordsOk);
 				$(noWordsLeft).removeClass('nodisplay');
 				$(learnWordsGrp).addClass('nodisplay');
 			}
@@ -791,7 +791,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 						word : Learn.wordsLearn[Learn.currentIndex].word,
 						translate: Learn.wordsLearn[Learn.currentIndex].translate,
 						step: step,
-						date: (step == 1) ? (Utils.getToday() + 864000000 * Settings.params.first) : 0
+						date: (step == 1) ? (LW.Utils.getToday() + 864000000 * Settings.params.first) : 0
 					};
 				
 				LW.wdsDB.storeItem('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
@@ -865,7 +865,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
 					var item = LW.wdsDB.readItem('learnWords-'+node);
 					
-					if (Utils.getToday() > item.date) { //if this word is for today
+					if (LW.Utils.getToday() > item.date) { //if this word is for today
 						if (item.step == 1) {
 							Repeat.wordsRepeat.first.push(item);
 						} else if (item.step == 2) {
@@ -889,7 +889,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			if (index == 0) {
 				wordPlaceholder = Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'][0]		[(Repeat.wordsRepeat.first.length) ? 'translate' : 'word'];
 			} else {
-				wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length-1)];	
+				wordPlaceholder = Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'][LW.Utils.getRandomInt(0, Vocabulary[(Repeat.wordsRepeat.first.length) ? 'translates' : 'words'].length-1)];	
 			}
 			
 			if(arrWords.indexOf(wordPlaceholder) >= 0)
@@ -910,7 +910,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				
 				var arrOptionButtons = $('[data-type=checkWordBtn]');
 				//the answer buttons are shuffled so that we don't know which one is the correct word.
-				Utils.shuffle(arrOptionButtons);
+				LW.Utils.shuffle(arrOptionButtons);
 				
 				arrOptionButtons.each(function(index, node){
 
@@ -967,10 +967,10 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			
 			if ($(self).text() == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
 				word.step++;
-				word.date = Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
+				word.date = LW.Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
 			} else {
 				word.step--;
-				word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + 864000000 * Settings.params.first;
+				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
 			}
 			LW.wdsDB.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
@@ -993,7 +993,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.date = 0;
 			} else {
 				word.step--;
-				word.date = Utils.getToday() + 864000000 * Settings.params.second;
+				word.date = LW.Utils.getToday() + 864000000 * Settings.params.second;
 			};
 			LW.wdsDB.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat.third.splice(0, 1); //remove from index
@@ -1025,8 +1025,8 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 Settings.getSettings();
 
 // set user saved local
-if (local.currentLocal != $('[data-type=lang-select].selected').data('lang')) {
-	$('[data-lang='+local.currentLocal+']').click();
+if (LW.local.current != $('[data-type=lang-select].selected').data('lang')) {
+	$('[data-lang='+LW.local.current+']').click();
 };
 
 // read vocabulary
@@ -1037,4 +1037,4 @@ Learn.recountIndexLearn();
 Learn.showWord();
 Repeat.recountIndexRepeat();
 Repeat.showWord();
-Utils.closeMobMenu();
+LW.Utils.closeMobMenu();
