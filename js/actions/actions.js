@@ -501,10 +501,12 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
                 MoveWordToOtherBoxAndGiveFeedback: function(word,answer) {
 
 			if (answer == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
-				word.step++;
+                                Repeat.answerWasCorrectFeedback(true);
+				word.step++;  // put word into next box
 				word.date = LW.Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
 			} else {
-				word.step--;
+                                Repeat.answerWasCorrectFeedback(true);
+				word.step--;  
 				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
 			};
 
@@ -525,17 +527,23 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 
 			Repeat.MoveWordToOtherBoxAndGiveFeedback(word,$(self).text());
 
-                        //remove word from word keys index
-			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); 
 
-                        // recalculate indexes for Learn box (step 0) and 
-                        // Repeat box (steps 1 .. 3)
+			setTimeout(function () {
+				$('#feedback').hide();
 
-			Learn.wordsLearn = [];
-			Learn.recountIndexLearn();
-			Learn.showWord();
-			Repeat.recountIndexRepeat();
-			Repeat.showWord();
+                                //remove word from word keys index
+				Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); 
+
+                                // recalculate indexes for Learn box (step 0) and 
+                                // Repeat boxes (steps 1 .. 3)
+				Learn.wordsLearn = [];
+				Learn.recountIndexLearn();
+				Learn.showWord();
+				Repeat.recountIndexRepeat();
+				Repeat.showWord();
+			}, 2000);
+
+
 		},
 		
 		repeatWord: function(){
