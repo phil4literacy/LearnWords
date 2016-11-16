@@ -146,18 +146,87 @@ var theWords = [
 
 ## Step 3
 
-Add code to initialize the missing attributes of the words and load them into the localStorage.
+
+Open the existing file memorystore.js, delete all code
+and paste the following code into it.
+
 
 ````JavaScript
 
-/*
- * This is a JavaScript Scratchpad.
- *
- * Enter some JavaScript, then Right Click or choose from the Execute Menu:
- * 1. Run to evaluate the selected text (Ctrl+R),
- * 2. Inspect to bring up an Object Inspector on the result (Ctrl+I), or,
- * 3. Display to insert the result in a comment after the selection. (Ctrl+L)
- */
+/**************************************************
+* Learn Words // memorystore.js
+* 
+* Example of a user generated file
+*
+* Your name, data
+*
+* License note
+**************************************************/
+
+if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 'undefined' || localStorageAPI.readItem('learnWords-settings') == null)) {
+    settings = {
+        first : 1,
+        second: 3,
+        third: 7
+    };
+    localStorageAPI.storeItem('learnWords-settings', settings);
+
+    localStorageAPI.storeItem('learnWords-language', 'en_GB');
+
+
+
+// /////////////////////////////
+// Insert code from step 2 here
+// /////////////////////////////
+
+
+var i= 0;
+var arrayOfKeys = [];
+
+theWords.forEach(function(element){
+  i = i + 1;
+  element.index = "index"+i;
+  element.step = 0;
+  element.date = 0;
+  localStorageAPI.storeItem('learnWords-'+element.index, element);
+  arrayOfKeys.push(element.index);
+}
+
+);
+
+localStorageAPI.storeItem('learnWords-words', arrayOfKeys.join());
+
+console.log(arrayOfKeys.length + " words loaded from memorystore.js");
+}
+
+````
+
+
+## Step 4
+Paste the code from step 2 at the right place in the file of step3. 
+The result should look like the code below. Save the file.
+
+````JavaScript
+
+/**************************************************
+* Learn Words // memorystore.js
+* 
+* Example of a user generated file
+*
+* Hannes Hirzel, November 2016
+*
+* Placed in public domain.
+**************************************************/
+
+if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 'undefined' || localStorageAPI.readItem('learnWords-settings') == null)) {
+    settings = {
+        first : 1,
+        second: 3,
+        third: 7
+    };
+    localStorageAPI.storeItem('learnWords-settings', settings);
+
+    localStorageAPI.storeItem('learnWords-language', 'en_GB');
 
 var theWords = [
   {
@@ -256,14 +325,33 @@ theWords.forEach(function(element){
   element.date = 0;
   localStorageAPI.storeItem('learnWords-'+element.index, element);
   arrayOfKeys.push(element.index);
-});
+}
 
-// TODO add code to store arrayOfKeys
+);
+
+localStorageAPI.storeItem('learnWords-words', arrayOfKeys.join());
+
+console.log(arrayOfKeys.length + " words loaded from memorystore.js");
+}
 
 ````
 
-## Step 4
 
-Save the code thus created as a new ``memorystore.js`` file
 
-TODO: check for the settings and initialize them.
+## Step 5
+
+Open the app by starting ``index.html``.
+If it is the first time you start the program your new memorystore.js
+code is loaded.
+
+If you have started ``index.html`` before the exiting content is not overwritten
+by the new memorystore.js file. To do so you have to reset the database first.
+
+Open 'Developer tools' in the browser and 'web console'.
+
+Execute
+
+    localStorageAPI.removeWords();
+
+Then open ``index.html``. All your new words should appear in the 'Learn' mode.
+
