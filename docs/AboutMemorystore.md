@@ -146,22 +146,212 @@ var theWords = [
 
 ## Step 3
 
+
+Open the existing file memorystore.js, delete all code
+and paste the following code into it.
+
+
 ````JavaScript
-"index": "index"+index,
-"step": 0,
-"date": 0
+
+/**************************************************
+* Learn Words // memorystore.js
+* 
+* Example of a user generated file
+*
+* Your name, data
+*
+* License note
+**************************************************/
+
+if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 'undefined' || localStorageAPI.readItem('learnWords-settings') == null)) {
+    settings = {
+        first : 1,
+        second: 3,
+        third: 7
+    };
+    localStorageAPI.storeItem('learnWords-settings', settings);
+
+    localStorageAPI.storeItem('learnWords-language', 'en_GB');
+
+
+
+// /////////////////////////////
+// Insert code from step 2 here
+// /////////////////////////////
+
+
+var i= 0;
+var arrayOfKeys = [];
+
+theWords.forEach(function(element){
+  i = i + 1;
+  element.index = "index"+i;
+  element.step = 0;
+  element.date = 0;
+  localStorageAPI.storeItem('learnWords-'+element.index, element);
+  arrayOfKeys.push(element.index);
+}
+
+);
+
+localStorageAPI.storeItem('learnWords-words', arrayOfKeys.join());
+
+console.log(arrayOfKeys.length + " words loaded from memorystore.js");
+}
+
 ````
 
 
 ## Step 4
+Paste the code from step 2 at the right place in the file of step3. 
+The result should look like the code below. Save the file.
 
 ````JavaScript
-forEach(item, index) do:
 
-localStorageAPI.storeItem('learnWords-'+item.index, item);
+/**************************************************
+* Learn Words // memorystore.js
+* 
+* Example of a user generated file
+*
+* Hannes Hirzel, November 2016
+*
+* Placed in public domain.
+**************************************************/
+
+if (localStorageAPI.isOK && (localStorageAPI.readItem('learnWords-settings') == 'undefined' || localStorageAPI.readItem('learnWords-settings') == null)) {
+    settings = {
+        first : 1,
+        second: 3,
+        third: 7
+    };
+    localStorageAPI.storeItem('learnWords-settings', settings);
+
+    localStorageAPI.storeItem('learnWords-language', 'en_GB');
+
+var theWords = [
+  {
+    "word": "Apfel",
+    "translate": "apple"
+  },
+  {
+    "word": "Orange",
+    "translate": "orange"
+  },
+  {
+    "word": "Papaya",
+    "translate": "pawpaw"
+  },
+  {
+    "word": "Himbeeren",
+    "translate": "raspberry"
+  },
+  {
+    "word": "Erdbeeren",
+    "translate": "strawberry"
+  },
+  {
+    "word": "Aprikose",
+    "translate": "apricot"
+  },
+  {
+    "word": "Kokosnuss",
+    "translate": "coconut"
+  },
+  {
+    "word": "Birne",
+    "translate": "pear"
+  },
+  {
+    "word": "Ananas",
+    "translate": "pineapple"
+  },
+  {
+    "word": "Guava",
+    "translate": "guava"
+  },
+  {
+    "word": "Banane",
+    "translate": "banana"
+  },
+  {
+    "word": "Melone",
+    "translate": "melon"
+  },
+  {
+    "word": "Zitrone",
+    "translate": "lemon"
+  },
+  {
+    "word": "Pflaume",
+    "translate": "plum"
+  },
+  {
+    "word": "Traube",
+    "translate": "grape"
+  },
+  {
+    "word": "Mango",
+    "translate": "mango"
+  },
+  {
+    "word": "Limette",
+    "translate": "lime"
+  },
+  {
+    "word": "Kirsche",
+    "translate": "cherry"
+  },
+  {
+    "word": "Kiwi",
+    "translate": "kiwi"
+  },
+  {
+    "word": "Heidelbeere",
+    "translate": "blueberry"
+  },
+  {
+    "word": "Brombeere",
+    "translate": "blackberry"
+  }
+];
+
+var i= 0;
+var arrayOfKeys = [];
+
+theWords.forEach(function(element){
+  i = i + 1;
+  element.index = "index"+i;
+  element.step = 0;
+  element.date = 0;
+  localStorageAPI.storeItem('learnWords-'+element.index, element);
+  arrayOfKeys.push(element.index);
+}
+
+);
+
+localStorageAPI.storeItem('learnWords-words', arrayOfKeys.join());
+
+console.log(arrayOfKeys.length + " words loaded from memorystore.js");
+}
+
 ````
+
 
 
 ## Step 5
 
-Save the code thus created as a new ``memorystore.js`` file
+Open the app by starting ``index.html``.
+If it is the first time you start the program your new memorystore.js
+code is loaded.
+
+If you have started ``index.html`` before the exiting content is not overwritten
+by the new memorystore.js file. To do so you have to reset the database first.
+
+Open 'Developer tools' in the browser and 'web console'.
+
+Execute
+
+    localStorageAPI.removeWords();
+
+Then open ``index.html``. All your new words should appear in the 'Learn' mode.
+
