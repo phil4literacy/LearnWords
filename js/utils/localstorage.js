@@ -1,12 +1,14 @@
 /**************************************************
-* Learn Words // localdtorage.js
+* Learn Words // localstorage.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
+* Update November 2016 by Hannes Hirzel
 **************************************************/
-if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localStorageAPI){
+
+if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 	
-	localStorageAPI = {
+	LW.wdsDB = {
 	
 		isLocalStorageAvailable: function() {
 				try {
@@ -16,20 +18,20 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 				}
 			},
 		
-		readItem: function(key){
-			if (localStorageAPI.isOK) {
-				return JSON.parse(localStorage.getItem( key ));
+		get: function(key){
+			if (LW.wdsDB.isOK) {
+				return JSON.parse(localStorage.getItem(key));
 			}
 		},
 		
-		removeItem: function(key){
-			if (localStorageAPI.isOK) {
+		remove: function(key){
+			if (LW.wdsDB.isOK) {
 				localStorage.removeItem( key );
 			}
 		},
 		
-		storeItem: function(key, value){
-			if (localStorageAPI.isOK) {
+		put: function(key, value){
+			if (LW.wdsDB.isOK) {
 				try {
 					localStorage.setItem(key, JSON.stringify(value));
 				} catch (e) {
@@ -42,8 +44,8 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 		},
 
 
-                removeWords: function(){
-			if (localStorageAPI.isOK) {
+		removeWords: function(){
+			if (LW.wdsDB.isOK) {
                         "use strict";
                         var key;
                         var st; 
@@ -72,6 +74,7 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
                         localStorage.setItem('learnWords-words', '');
 
                         // this one triggers that memorystore is executed
+
                         localStorage.removeItem('learnWords-settings');
                         }
 
@@ -79,15 +82,15 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 
 		
 		init: function(){
-			localStorageAPI.isOK = false;
-			if (!localStorageAPI.isLocalStorageAvailable()) {
+			LW.wdsDB.isOK = false;
+			if (!LW.wdsDB.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
 			}
-			localStorageAPI.isOK = true;
+			LW.wdsDB.isOK = true;
 		}
 	};
 	
-	localStorageAPI.init();
+	LW.wdsDB.init();
 }
 
