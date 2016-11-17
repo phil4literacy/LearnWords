@@ -3,14 +3,21 @@
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
 * Placed in public domain.
+*
 * Update November 2016 by Hannes Hirzel
+*
 **************************************************/
 
-if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
-	
+	// Define global LearnWords object
+	var LW = {}; 
+
+
+	// Define database sub-object
+
 	LW.wdsDB = {
 	
 		isLocalStorageAvailable: function() {
+                                "use strict";
 				try {
 					return 'localStorage' in window && window['localStorage'] !== null;
 				} catch (e) {
@@ -31,6 +38,7 @@ if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 		},
 		
 		put: function(key, value){
+                        "use strict";
 			if (LW.wdsDB.isOK) {
 				try {
 					localStorage.setItem(key, JSON.stringify(value));
@@ -110,15 +118,22 @@ if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 
 		
 		init: function(){
+                        "use strict";
 			LW.wdsDB.isOK = false;
+
 			if (!LW.wdsDB.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
 			}
 			LW.wdsDB.isOK = true;
+
+                        // Initialize index array object 
+                        // index is an array with the keys for all words.
+
+			LW.wdsDB.index = LW.wdsDB.get('learnWords-words').split(',');
+
 		}
 	};
 	
 	LW.wdsDB.init();
-}
 

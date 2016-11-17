@@ -35,22 +35,12 @@
 Settings.getSettings();
 
 
-
-
 // Set the user saved local information
 // This is the user interface language
 
 if (LW.local.current != $('[data-type=lang-select].selected').data('lang')) {
 	$('[data-lang='+LW.local.current+']').click();
 };
-
-
-
-
-// Make vocabulary accessible from storage
-// index is an array with the keys for all words.
-
-LW.wdsDB.index = LW.wdsDB.get('learnWords-words').split(',');
 
 
 
