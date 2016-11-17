@@ -82,7 +82,7 @@ if(typeof(LW.wdsDB) == 'undefined' || LW.wdsDB == null || !LW.wdsDB){
 
 
                 dumpWords: function(aKeyPrefix) {
-		           if (localStorageAPI.isOK) {
+		           if (LW.wdsDB.isOK) {
                             "use strict";
                             var key;
                             var strValue; 
