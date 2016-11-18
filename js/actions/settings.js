@@ -17,7 +17,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 		params: {},
 	
 		getSettings: function(){ //read setting's values
-			var settings = localStorageAPI.readItem('learnWords-settings');
+			var settings = LW.db.readItem('learnWords-settings');
 			
 			$(Settings.inputFirstCheck).val(settings.first);
 			$(Settings.inputSecondCheck).val(settings.second);
@@ -68,7 +68,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 					second: second,
 					third: third
 				};
-				localStorageAPI.storeItem('learnWords-settings', settings);
+				LW.db.storeItem('learnWords-settings', settings);
 				$(Settings.errorSettings).removeClass('nodisplay').text(local[local.currentLocal].errorNo);
 				
 				Settings.params = settings; //store local

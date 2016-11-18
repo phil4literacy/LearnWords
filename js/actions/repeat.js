@@ -2,6 +2,9 @@
 * Learn Words // repeat.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+*
+* Updated by Hannes Hirzel, November 2016
+*
 * Placed in public domain.
 **************************************************/
 if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
@@ -24,12 +27,15 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		noWordsRepeat: $('#noWordsRepeat'),
 		enterBtn: $('#enterBtn'),
 		
-		recountIndexRepeat: function(){ //count words to Repeat
+		recountIndexRepeat: function(){ 
+                        //count words to Repeat
+                        "use strict";
 			if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
-				$(wordsIndex).each(function(index, node){ //the initial counting
-					var item = localStorageAPI.readItem('learnWords-'+node);
-					
-					if (Utils.getToday() > item.date) { //if this word is for today
+				$(LW.db.index).each(function(index, node){ //the initial counting
+					var item = LW.db.readItem('learnWords-'+node);
+                                        if(item) {					
+					 if (Utils.getToday() > item.date) { //if this word is for today
+
 						if (item.step == 1) {
 							Repeat.wordsRepeat.first.push(item);
 						} else if (item.step == 2) {
@@ -37,6 +43,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 						} if (item.step == 3) {
 							Repeat.wordsRepeat.third.push(item);
 						}
+                                          }
 					}
 				});
 			}
@@ -103,7 +110,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			if (step) {
 				
 				
-				localStorageAPI.storeItem('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
+				LW.db.storeItem('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
 				
 				if (reindex) {
 					Repeat.wordsRepeat.splice(Repeat.currentIndex, 1); //remove from index
@@ -136,7 +143,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step--;
 				word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + 864000000 * Settings.params.first;
 			}
-			localStorageAPI.storeItem('learnWords-'+word.index, word); //save word
+			LW.db.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();
@@ -159,7 +166,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step--;
 				word.date = Utils.getToday() + 864000000 * Settings.params.second;
 			};
-			localStorageAPI.storeItem('learnWords-'+word.index, word); //save word
+			LW.db.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat.third.splice(0, 1); //remove from index
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();

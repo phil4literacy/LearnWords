@@ -25,19 +25,19 @@ LW.db = {
 			},
 		
 		readItem: function(key){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
 				return JSON.parse(localStorage.getItem( key ));
 			}
 		},
 		
 		removeItem: function(key){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
 				localStorage.removeItem( key );
 			}
 		},
 		
 		storeItem: function(key, value){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
 				try {
 					localStorage.setItem(key, JSON.stringify(value));
 				} catch (e) {
@@ -51,7 +51,7 @@ LW.db = {
 
 
                 removeWords: function(){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
                         "use strict";
                         var key;
                         var st; 
@@ -87,7 +87,7 @@ LW.db = {
 
 
                 dumpWords: function(aKeyPrefix) {
-		           if (localStorageAPI.isOK) {
+		           if (LW.db.isOK) {
                             "use strict";
                             var key;
                             var strValue; 
@@ -115,14 +115,14 @@ LW.db = {
 
 		
 		init: function(){
-			localStorageAPI.isOK = false;
-			if (!localStorageAPI.isLocalStorageAvailable()) {
+			LW.db.isOK = false;
+			if (!LW.db.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
 			};
                         // generate index
-                        this.index = localStorageAPI.readItem('learnWords-words').split(',');
-			localStorageAPI.isOK = true;
+                        LW.db.index = localStorage.getItem('learnWords-words').split(',');
+			LW.db.isOK = true;
 		}
 	};
 	

@@ -22,12 +22,15 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 		allWordsOk: $('#allWordsOk'),
 		
 		recountIndexLearn: function(){ //count words to learn
+                        "use strict";
 			if (!Learn.wordsLearn.length) {
-				$(wordsIndex).each(function(index, node){ //the initial counting
-					var item = localStorageAPI.readItem('learnWords-'+node);
-					if (item.step == 0) {
-						Learn.wordsLearn.push(item);
-					}
+				$(LW.db.index).each(function(index, node){ //the initial counting
+					var item = LW.db.readItem('learnWords-'+node);
+                                        if (item) {
+					    if (item.step == 0) {
+						    Learn.wordsLearn.push(item);
+					    }
+                                        }
 				});
 			}
 			var wordsLearnLength = (Learn.wordsLearn.length) ? Learn.wordsLearn.length : '';
@@ -60,7 +63,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 						date: (step == 1) ? (Utils.getToday() + 864000000 * Settings.params.first) : 0
 					};
 				
-				localStorageAPI.storeItem('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
+				LW.db.storeItem('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
 				
 				if (reindex) {
 					Learn.wordsLearn.splice(Learn.currentIndex, 1); //remove from index
