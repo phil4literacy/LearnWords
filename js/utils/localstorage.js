@@ -9,9 +9,12 @@
 **************************************************/
 
 
-if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localStorageAPI){
-	
-	localStorageAPI = {
+// Define global LearnWords object
+var LW = {}; 
+
+
+// Define database sub-object
+LW.db = {
 	
 		isLocalStorageAvailable: function() {
 				try {
@@ -116,16 +119,15 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 			if (!localStorageAPI.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
-			}
+			};
+                        // generate index
+                        this.index = localStorageAPI.readItem('learnWords-words').split(',');
 			localStorageAPI.isOK = true;
 		}
 	};
 	
-	localStorageAPI.init();
-}
 
-
-// generate index
-var wordsIndex = localStorageAPI.readItem('learnWords-words').split(',');
+// initialize database sub-object
+LW.db.init();
 
 
