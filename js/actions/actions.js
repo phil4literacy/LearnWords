@@ -30,7 +30,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 		params: {},
 	
 		getSettings: function(){ //read setting's values
-			var settings = LW.wdsDB.get('learnWords-settings');
+			var settings = LW.db.get('learnWords-settings');
 			
 			$(Settings.inputFirstCheck).val(settings.first);
 			$(Settings.inputSecondCheck).val(settings.second);
@@ -81,7 +81,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 					second: second,
 					third: third
 				};
-				LW.wdsDB.put('learnWords-settings', settings);
+				LW.db.put('learnWords-settings', settings);
 				$(Settings.errorSettings).removeClass('nodisplay').text(LW.local[LW.local.current].errorNo);
 				
 				Settings.params = settings; //store local
@@ -135,7 +135,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 		translates: [],
 		
 		recountTotal: function(){
-			$(Vocabulary.totalWordsNum).text(LW.wdsDB.index.length);
+			$(Vocabulary.totalWordsNum).text(LW.db.index.length);
 		},
 		
 		removeWord: function(self, notReindex){ //remove word from vocabulary
@@ -143,10 +143,10 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				node = $(self).data('node');
 			
 			if (!notReindex) {
-				LW.wdsDB.index.splice(id, 1); //remove from index
-				LW.wdsDB.put('learnWords-words', LW.wdsDB.index.join());
+				LW.db.index.splice(id, 1); //remove from index
+				LW.db.put('learnWords-words', LW.db.index.join());
 			}
-			LW.wdsDB.remove('learnWords-'+node); //remove this word
+			LW.db.remove('learnWords-'+node); //remove this word
 			$('#'+node).remove();
 			$('#'+node+'Edit').remove();
 			Vocabulary.recountTotal();
@@ -166,8 +166,8 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 		viewWord: function(){
 			var contentInner = '';
 			
-			$(LW.wdsDB.index).each(function(index, node){
-				var item = LW.wdsDB.get('learnWords-'+node),
+			$(LW.db.index).each(function(index, node){
+				var item = LW.db.get('learnWords-'+node),
 					txt = item.word,
 					translate = item.translate;
 				
@@ -206,11 +206,11 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 					step: 0,
 					date: 0
 				};
-				LW.wdsDB.put('learnWords-'+todayDate, word); //save word
-				contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? LW.wdsDB.index.length : LW.wdsDB.index.indexOf(inputWord));
+				LW.db.put('learnWords-'+todayDate, word); //save word
+				contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? LW.db.index.length : LW.db.index.indexOf(inputWord));
 				
 				if (addWord) {
-					LW.wdsDB.index.push(todayDate);
+					LW.db.index.push(todayDate);
 					wordTxt.val('');
 					translate.val('');
 					$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
@@ -219,12 +219,12 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				} else {
 					var id = wordTxt.attr('id').slice(5);
 					
-					LW.wdsDB.index[LW.wdsDB.index.indexOf(id)] = todayDate;
+					LW.db.index[LW.db.index.indexOf(id)] = todayDate;
 					$('#' + id).before(contentInner);
 					Vocabulary.removeWord($('#del-' + id), true);
 				}
 				
-				LW.wdsDB.put('learnWords-words', LW.wdsDB.index.join()); //add word to Vocabulary list
+				LW.db.put('learnWords-words', LW.db.index.join()); //add word to Vocabulary list
 				LW.Utils.clearFields();
 				Vocabulary.recountTotal();
 				Learn.wordsLearn = [];
@@ -278,8 +278,8 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 		
 		recountIndexLearn: function(){ //count words to learn
 			if (!Learn.wordsLearn.length) {
-				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
-					var item = LW.wdsDB.get('learnWords-'+node);
+				$(LW.db.index).each(function(index, node){ //the initial counting
+					var item = LW.db.get('learnWords-'+node);
 					if (item.step == 0) {
 						Learn.wordsLearn.push(item);
 					}
@@ -315,7 +315,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 						date: (step == 1) ? (LW.Utils.getToday() + 864000000 * Settings.params.first) : 0
 					};
 				
-				LW.wdsDB.put('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
+				LW.db.put('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
 				
 				if (reindex) {
 					Learn.wordsLearn.splice(Learn.currentIndex, 1); //remove from index
@@ -401,8 +401,8 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 
 		recountIndexRepeat: function(){ //count words to Repeat
 			if (!Repeat.wordsRepeat.first.length && !Repeat.wordsRepeat.second.length && !Repeat.wordsRepeat.third.length) {
-				$(LW.wdsDB.index).each(function(index, node){ //the initial counting
-					var item = LW.wdsDB.get('learnWords-'+node);
+				$(LW.db.index).each(function(index, node){ //the initial counting
+					var item = LW.db.get('learnWords-'+node);
 					
 					if (LW.Utils.getToday() > item.date) { //if this word is for today
 						if (item.step == 1) {
@@ -478,7 +478,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			if (step) {
 				
 				
-				LW.wdsDB.put('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
+				LW.db.put('learnWords-'+Repeat.wordsRepeat[Repeat.currentIndex].word, word); //save word
 				
 				if (reindex) {
 					Repeat.wordsRepeat.splice(Repeat.currentIndex, 1); //remove from index
@@ -511,7 +511,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			};
 
 			//save word
-			LW.wdsDB.put('learnWords-'+word.index, word);
+			LW.db.put('learnWords-'+word.index, word);
 		},
 
 
@@ -560,7 +560,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step--;
 				word.date = LW.Utils.getToday() + 864000000 * Settings.params.second;
 			};
-			LW.wdsDB.put('learnWords-'+word.index, word); //save word
+			LW.db.put('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat.third.splice(0, 1); //remove from index
 			Learn.wordsLearn = [];
 			Learn.recountIndexLearn();

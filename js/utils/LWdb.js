@@ -14,7 +14,7 @@
 
 	// Define database sub-object
 
-	LW.wdsDB = {
+	LW.db = {
 	
 		isLocalStorageAvailable: function() {
                                 "use strict";
@@ -26,20 +26,20 @@
 			},
 		
 		get: function(key){
-			if (LW.wdsDB.isOK) {
+			if (LW.db.isOK) {
 				return JSON.parse(localStorage.getItem(key));
 			}
 		},
 		
 		remove: function(key){
-			if (LW.wdsDB.isOK) {
+			if (LW.db.isOK) {
 				localStorage.removeItem( key );
 			}
 		},
 		
 		put: function(key, value){
                         "use strict";
-			if (LW.wdsDB.isOK) {
+			if (LW.db.isOK) {
 				try {
 					localStorage.setItem(key, JSON.stringify(value));
 				} catch (e) {
@@ -53,7 +53,7 @@
 
 
 		removeWords: function(){
-			if (LW.wdsDB.isOK) {
+			if (LW.db.isOK) {
                         "use strict";
                         var key;
                         var st; 
@@ -90,7 +90,7 @@
 
 
                 dumpWords: function(aKeyPrefix) {
-		           if (LW.wdsDB.isOK) {
+		           if (LW.db.isOK) {
                             "use strict";
                             var key;
                             var strValue; 
@@ -119,21 +119,21 @@
 		
 		init: function(){
                         "use strict";
-			LW.wdsDB.isOK = false;
+			LW.db.isOK = false;
 
-			if (!LW.wdsDB.isLocalStorageAvailable()) {
+			if (!LW.db.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
 			}
-			LW.wdsDB.isOK = true;
+			LW.db.isOK = true;
 
                         // Initialize index array object 
                         // index is an array with the keys for all words.
 
-			LW.wdsDB.index = LW.wdsDB.get('learnWords-words').split(',');
+			LW.db.index = LW.db.get('learnWords-words').split(',');
 
 		}
 	};
 	
-	LW.wdsDB.init();
+	LW.db.init();
 
