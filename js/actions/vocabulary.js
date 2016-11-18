@@ -77,6 +77,8 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 		},
 		
 		addSaveWord: function(wordTxt, translate, addForm, addWord){
+                        "use strict";
+                        
 			var inputWord = wordTxt.val().trim(),
 				inputTranslate = translate.val().trim(),
 				form = addForm,
@@ -94,7 +96,8 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
 				$(Vocabulary.errorVocabulary).text(local[local.currentLocal].errorEmpty);
 			} else { //otherwise save new word to Vocabulary
-				var todayDate = Utils.getToday(true);
+				var newIndexVal;
+                                var todayDate = Utils.getToday(true);
 				word = {
 					index: todayDate,
 					word : inputWord,
@@ -102,11 +105,15 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 					step: 0,
 					date: 0
 				};
-				localStorageAPI.storeItem('learnWords-'+todayDate, word); //save word
-				contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? wordsIndex.length : wordsIndex.indexOf(inputWord));
+
+                                // save newly added word
+                                newIndexVal = 'index'+(wordsIndex.length+1);
+				localStorageAPI.storeItem('learnWords-'+newIndexVal, word); 
+
+				var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? wordsIndex.length : wordsIndex.indexOf(inputWord));
 				
 				if (addWord) {
-					wordsIndex.push(todayDate);
+					wordsIndex.push(newIndexVal);
 					wordTxt.val('');
 					translate.val('');
 					$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
@@ -115,7 +122,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				} else {
 					var id = wordTxt.attr('id').slice(5);
 					
-					wordsIndex[wordsIndex.indexOf(id)] = todayDate;
+					wordsIndex[wordsIndex.indexOf(id)] = newIndexVal;
 					$('#' + id).before(contentInner);
 					Vocabulary.removeWord($('#del-' + id), true);
 				}
