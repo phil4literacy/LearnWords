@@ -120,6 +120,7 @@ theWords.forEach(function(element){
 );
 
 LW.db.put('learnWords-words', arrayOfKeys.join());
+LW.db.index = arrayOfKeys; 
 
 console.log(arrayOfKeys.length + " words loaded from memorystore.js");
 }

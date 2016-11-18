@@ -180,7 +180,13 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 			Vocabulary.recountTotal();
 		},
 		
+
+
+
+
 		addSaveWord: function(wordTxt, translate, addForm, addWord){
+                        "use strict";
+                        
 			var inputWord = wordTxt.val().trim(),
 				inputTranslate = translate.val().trim(),
 				form = addForm,
@@ -196,9 +202,10 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 			}
 			if (error) { //show error if any
 				$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
-				$(Vocabulary.errorVocabulary).text(LW.local[LW.local.current].errorEmpty);
+				$(Vocabulary.errorVocabulary).text(local[local.currentLocal].errorEmpty);
 			} else { //otherwise save new word to Vocabulary
-				var todayDate = LW.Utils.getToday(true);
+				var newIndexVal;
+                                var todayDate = LW.Utils.getToday(true);
 				word = {
 					index: todayDate,
 					word : inputWord,
@@ -206,11 +213,15 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 					step: 0,
 					date: 0
 				};
-				LW.db.put('learnWords-'+todayDate, word); //save word
-				contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? LW.db.index.length : LW.db.index.indexOf(inputWord));
+
+                                // save newly added word
+                                newIndexVal = 'index'+(LW.db.index.length+1);
+				LW.db.put('learnWords-'+newIndexVal, word); 
+
+				var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? LW.db.index.length : LW.db.index.indexOf(inputWord));
 				
 				if (addWord) {
-					LW.db.index.push(todayDate);
+					LW.db.index.push(newIndexVal);
 					wordTxt.val('');
 					translate.val('');
 					$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
@@ -219,7 +230,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				} else {
 					var id = wordTxt.attr('id').slice(5);
 					
-					LW.db.index[LW.db.index.indexOf(id)] = todayDate;
+					LW.db.index[LW.db.index.indexOf(id)] = newIndexVal;
 					$('#' + id).before(contentInner);
 					Vocabulary.removeWord($('#del-' + id), true);
 				}
@@ -232,6 +243,12 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				Learn.showWord();
 			};
 		},
+		
+
+
+
+
+
 		
 		init: function(){
 			$(document).on('click touchstart', '#addBtn', function(){
