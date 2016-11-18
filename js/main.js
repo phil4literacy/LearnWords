@@ -12,8 +12,6 @@ if (local.currentLocal != $('[data-type=lang-select].selected').data('lang')) {
 	$('[data-lang='+local.currentLocal+']').click();
 };
 
-// read vocabulary
-var wordsIndex = localStorageAPI.readItem('learnWords-words').split(',');
 Vocabulary.viewWord();
 Learn.recountIndexLearn();
 Learn.showWord();
