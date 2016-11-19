@@ -25,6 +25,7 @@
 * LW.db.remove(key)
 * LW.db.removeObjects(aKeyPrefix)
 *
+* LW.db.loadWords(arrayOfWords)
 * LW.db.removeWords()
 *
 * LW.db.isEmpty()
@@ -251,6 +252,6 @@
 	};
 
 
-	// LW.db.init("learnWords");	
+	LW.db.init("learnWords");	
 	// LW.db.init("LWdb");
-        LW.db.init("LWtestDB");	
+        // LW.db.init("LWtestDB");	
