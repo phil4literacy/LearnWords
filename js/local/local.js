@@ -125,13 +125,13 @@ if(typeof(LW.local) == 'undefined' || LW.local == null || !LW.local){
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
 			LW.local.changeLocalContent();
-			LW.db.put('learnWords-language', LW.local.current);
+			LW.db.put(LW.db.name+'-language', LW.local.current);
 			$(this).addClass('selected');
 			return false;
 		},
 		
 		init: function(){
-			LW.local.current = LW.db.get('learnWords-language');
+			LW.local.current = LW.db.get(LW.db.name+'-language');
 			$(document).on('click touchstart', '[data-type=lang-select]', LW.local.langSelect);
 		}
 	}

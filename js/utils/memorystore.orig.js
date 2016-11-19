@@ -10,18 +10,18 @@
 * see: https://github.com/e1r0nd/LearnWords/issues/6
 *******************************************************/
 
-if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get('learnWords-settings') == null)) {
+if (LW.db.isOK && (LW.db.get(LW.db.name+'-settings') == 'undefined' || LW.db.get(LW.db.name+'-settings') == null)) {
 	settings = {
 		first : 1,
 		second: 3,
 		third: 7
 	};
-	LW.db.put('learnWords-settings', settings);
+	LW.db.put(LW.db.name+'-settings', settings);
 	
-	LW.db.put('learnWords-language', 'en_GB');
+	LW.db.put(LW.db.name+'-language', 'en_GB');
 	
 	var words = ['index1', 'index2', 'index3', 'index4', 'index5', 'index6', 'index7', 'index8', 'index9', 'index10', 'index11', 'index12', 'index13', 'index14'];
-	LW.db.put('learnWords-words', words.join());
+	LW.db.put(LW.db.name+'-words', words.join());
 	
 	index1 = {
 		index: 'index1',
@@ -30,7 +30,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index1', index1);
+	LW.db.put(LW.db.name+'-index1', index1);
 	
 	index2 = {
 		index: 'index2',
@@ -39,7 +39,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index2', index2);
+	LW.db.put(LW.db.name+'-index2', index2);
 
 	index3 = {	
 		index: 'index3',
@@ -48,7 +48,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index3', index3);
+	LW.db.put(LW.db.name+'-index3', index3);
 	
 	index4 = {	
 		index: 'index4',
@@ -57,7 +57,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index4', index4);
+	LW.db.put(LW.db.name+'-index4', index4);
 	
 	index5 = {
 		index: 'index5',
@@ -66,7 +66,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index5', index5);
+	LW.db.put(LW.db.name+'-index5', index5);
 	
 	index6 = {
 		index: 'index6',
@@ -75,7 +75,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index6', index6);
+	LW.db.put(LW.db.name+'-index6', index6);
 	
 	index7 = {
 		index: 'index7',
@@ -84,7 +84,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index7', index7);
+	LW.db.put(LW.db.name+'-index7', index7);
 	
 	index8 = {
 		index: 'index8',
@@ -93,7 +93,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 0,
 		date: 0
 	};
-	LW.db.put('learnWords-index8', index8);
+	LW.db.put(LW.db.name+'-index8', index8);
 	
 	index9 = {
 		index: 'index9',
@@ -102,7 +102,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 1,
 		date: 0
 	};
-	LW.db.put('learnWords-index9', index9);
+	LW.db.put(LW.db.name+'-index9', index9);
 	
 	index10 = {
 		index: 'index10',
@@ -111,7 +111,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 1,
 		date: 0
 	};
-	LW.db.put('learnWords-index10', index10);
+	LW.db.put(LW.db.name+'-index10', index10);
 	
 	index11 = {
 		index: 'index11',
@@ -120,7 +120,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 1,
 		date: 0
 	};
-	LW.db.put('learnWords-index11', index11);
+	LW.db.put(LW.db.name+'-index11', index11);
 	
 	index12 = {
 		index: 'index12',
@@ -129,7 +129,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 2,
 		date: 0
 	};
-	LW.db.put('learnWords-index12', index12);
+	LW.db.put(LW.db.name+'-index12', index12);
 	
 	index13 = {
 		index: 'index13',
@@ -138,7 +138,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 2,
 		date: 0
 	};
-	LW.db.put('learnWords-index13', index13);
+	LW.db.put(LW.db.name+'-index13', index13);
 	
 	index14 = {
 		index: 'index14',
@@ -147,7 +147,7 @@ if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get(
 		step: 3,
 		date: 0
 	};
-	LW.db.put('learnWords-index14', index14);
+	LW.db.put(LW.db.name+'-index14', index14);
 	
 	console.log(localStorage);
 

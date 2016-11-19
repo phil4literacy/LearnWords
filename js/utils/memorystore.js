@@ -8,15 +8,15 @@
 * Placed in public domain.
 **************************************************/
 
-if (LW.db.isOK && (LW.db.get('learnWords-settings') == 'undefined' || LW.db.get('learnWords-settings') == null)) {
+if (LW.db.isOK && (LW.db.get(LW.db.name+'-settings') == 'undefined' || LW.db.get(LW.db.name+'-settings') == null)) {
     settings = {
         first : 1,
         second: 3,
         third: 7
     };
-    LW.db.put('learnWords-settings', settings);
+    LW.db.put(LW.db.name+'-settings', settings);
 
-    LW.db.put('learnWords-language', 'en_GB');
+    LW.db.put(LW.db.name+'-language', 'en_GB');
 
 var theWords = [
   {
@@ -113,13 +113,13 @@ theWords.forEach(function(element){
   element.index = "index"+i;
   element.step = 0;
   element.date = 0;
-  LW.db.put('learnWords-'+element.index, element);
+  LW.db.put(LW.db.name+'-'+element.index, element);
   arrayOfKeys.push(element.index);
 }
 
 );
 
-LW.db.put('learnWords-words', arrayOfKeys.join());
+LW.db.put(LW.db.name + '-words', arrayOfKeys.join());
 LW.db.index = arrayOfKeys; 
 
 console.log(arrayOfKeys.length + " words loaded from memorystore.js");
