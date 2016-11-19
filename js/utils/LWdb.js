@@ -7,6 +7,16 @@
 * will be updated
 *
 *
+* Property
+* -------
+*
+* db.name
+*
+*
+*
+* Methods
+* -------
+*
 * LW.db.get(key)
 * LW.db.put(key,value)
 *
@@ -77,7 +87,7 @@
                             var strValue; 
                             var result = [];
 
-                            var prefixForNumber = 'learnWords-index';  
+                            var prefixForNumber = LW.db.name+'-index';  
 
                             // go through all keys starting with the name
                             // of the database, i.e 'learnWords-index14'
@@ -127,14 +137,14 @@
 
 		removeWords: function(){
 
-                        var aKeyPrefix = 'learnWords-index';  
+                        var aKeyPrefix = LW.db.name+'-index';  
                         LW.db.removeObjects(aKeyPrefix);
 
                         // reset index
-                        localStorage.setItem('learnWords-words', '');
+                        localStorage.setItem(LW.db.name+'-words', '');
 
                         // this one triggers that memorystore is executed
-                        localStorage.removeItem('learnWords-settings');
+                        localStorage.removeItem(LW.db.name+'-settings');
 
 		},
 
@@ -142,7 +152,7 @@
 
 		destroy: function(){
 
-                        var aKeyPrefix = 'learnWords';  
+                        var aKeyPrefix = LW.db.name;  
 
                         LW.db.removeObjects(aKeyPrefix);
 
@@ -150,7 +160,7 @@
 
 
 		
-		init: function(){
+		init: function(dbName){
                         "use strict";
 			LW.db.isOK = false;
 
@@ -160,14 +170,18 @@
 			}
 			LW.db.isOK = true;
 
+                        LW.db.name = dbName;
+
                         // Initialize index array object 
                         // index is an array with the keys for all words.
                         LW.db.index = [];
-                        var strIndex = LW.db.get('learnWords-words'); 
+                        var strIndex = LW.db.get(LW.db.name+'-words'); 
 			if (strIndex) {LW.db.index = strIndex.split(',')};
 
 		}
 	};
+
+
 	
-	LW.db.init();
+	LW.db.init("learnWords");
 
