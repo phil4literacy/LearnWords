@@ -138,10 +138,10 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			
 			if ($(self).text() == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
 				word.step++;
-				word.date = Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
+				word.date = Utils.getToday() + Utils.delay * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
 			} else {
 				word.step--;
-				word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + 864000000 * Settings.params.first;
+				word.date = (Repeat.wordsRepeat.first.length) ? 0 : Utils.getToday() + Utils.delay * Settings.params.first;
 			}
 			LW.db.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat[(Repeat.wordsRepeat.first.length) ? 'first' : 'second'].splice(0, 1); //remove from index
@@ -164,7 +164,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.date = 0;
 			} else {
 				word.step--;
-				word.date = Utils.getToday() + 864000000 * Settings.params.second;
+				word.date = Utils.getToday() + Utils.delay * Settings.params.second;
 			};
 			LW.db.storeItem('learnWords-'+word.index, word); //save word
 			Repeat.wordsRepeat.third.splice(0, 1); //remove from index
