@@ -8,7 +8,7 @@
 * Placed in public domain.
 **************************************************/
 
-if (LW.db.isOK && (LW.db.get(LW.db.name+'-settings') == 'undefined' || LW.db.get(LW.db.name+'-settings') == null)) {
+if (LW.db.isEmpty()) {
 
 var theWords = [
   {

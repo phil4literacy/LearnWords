@@ -27,6 +27,10 @@
 *
 * LW.db.removeWords()
 *
+* LW.db.isEmpty()
+*
+* LW.db.getSettings()
+* LW.db.putSettings(theSettings)
 *
 * LW.db.destroy()
 *
@@ -90,7 +94,7 @@
                         if (!settings) {
                             // initialize settings
 
-                            // first is for box 1 in the Leitner box; 
+                            // first is for box (or step) 1 in the Leitner box; 
                             //       ask the word again after 1 day
                             // second is for box 2 ; ask the word again after 3 days
                             // third is for box 3 ; ask the word again after 7 days
@@ -190,6 +194,11 @@
 		},
 
 
+		isEmpty: function(key){
+			if (LW.db.isOK) {
+				if (LW.db.index.length == 0) {return true} else {return false};
+			}
+		},
 
 
 
@@ -216,6 +225,6 @@
 	};
 
 
-	LW.db.init("learnWords");	
+	// LW.db.init("learnWords");	
 	// LW.db.init("LWdb");
-
+        LW.db.init("LWtestDB");	
