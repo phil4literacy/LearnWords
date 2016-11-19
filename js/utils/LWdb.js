@@ -80,6 +80,38 @@
 		},
 
 
+		putSettings: function(theSettingsObj){
+                    	LW.db.put(LW.db.name+'-settings', theSettingsObj);
+		},
+
+
+		getSettings: function(){
+			var settings = LW.db.get(LW.db.name+'-settings');
+                        if (!settings) {
+                            // initialize settings
+
+                            // first is for box 1 in the Leitner box; 
+                            //       ask the word again after 1 day
+                            // second is for box 2 ; ask the word again after 3 days
+                            // third is for box 3 ; ask the word again after 7 days
+
+                            // Note: box 0 is for the Learn mode and it not set 
+                            // as the words are accessible all the time
+                      
+			    settings = {
+        				first : 1,
+        				second: 3,
+        				third: 7
+    			     };
+    			     LW.db.put(LW.db.name+'-settings', settings);
+    			     LW.db.put(LW.db.name+'-language', 'en_GB');
+
+                        };
+
+	                return settings
+		},
+
+
 
                 dumpWords: function(aKeyPrefix) {
 		           if (LW.db.isOK) {
@@ -110,7 +142,6 @@
 
 		removeObjects: function(aKeyPrefix){
 			if (LW.db.isOK) {
-                         "use strict";
                          var key;
                          var st; 
                          var keysToDelete = [];
@@ -159,9 +190,12 @@
 		},
 
 
+
+
+
+
 		
 		init: function(dbName){
-                        "use strict";
 			LW.db.isOK = false;
 
 			if (!LW.db.isLocalStorageAvailable()) {

@@ -30,7 +30,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 		params: {},
 	
 		getSettings: function(){ //read setting's values
-			var settings = LW.db.get(LW.db.name+'-settings');
+			var settings = LW.db.getSettings();
 			
 			$(Settings.inputFirstCheck).val(settings.first);
 			$(Settings.inputSecondCheck).val(settings.second);
@@ -81,7 +81,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 					second: second,
 					third: third
 				};
-				LW.db.put(LW.db.name+'-settings', settings);
+                                LW.db.putSettings(settings);
 				$(Settings.errorSettings).removeClass('nodisplay').text(LW.local[LW.local.current].errorNo);
 				
 				Settings.params = settings; //store local

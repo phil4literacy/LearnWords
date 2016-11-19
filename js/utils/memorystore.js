@@ -9,14 +9,6 @@
 **************************************************/
 
 if (LW.db.isOK && (LW.db.get(LW.db.name+'-settings') == 'undefined' || LW.db.get(LW.db.name+'-settings') == null)) {
-    settings = {
-        first : 1,
-        second: 3,
-        third: 7
-    };
-    LW.db.put(LW.db.name+'-settings', settings);
-
-    LW.db.put(LW.db.name+'-language', 'en_GB');
 
 var theWords = [
   {
