@@ -1,9 +1,13 @@
 /**************************************************
-* Learn Words // localstorage.js
-* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
-* http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
-*
-* Updated by Hannes Hirzel, November 2016
+* Learn Words // LWdb.js
+* 
+* Database access 
+* 
+* LW.db.readItem(key)
+* LW.db.removeItem(key)
+* LW.db.storeItem(key,value)
+* LW.db.dumpWords()
+* LW.db.init()
 *
 * Placed in public domain.
 **************************************************/
@@ -86,7 +90,7 @@ LW.db = {
 		},
 
 
-                dumpWords: function(aKeyPrefix) {
+                dumpWords: function() {
 		           if (LW.db.isOK) {
                             "use strict";
                             var key;
