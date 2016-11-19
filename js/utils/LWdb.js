@@ -30,7 +30,7 @@
 *
 * LW.db.destroy()
 *
-* LW.db.init()
+* LW.db.init(dbName)
 *
 *
 **************************************************/
@@ -182,6 +182,6 @@
 	};
 
 
-	
-	LW.db.init("learnWords");
+	LW.db.init("learnWords");	
+	// LW.db.init("LWdb");
 
