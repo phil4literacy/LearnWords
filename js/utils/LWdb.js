@@ -117,6 +117,32 @@
 
 
 
+
+		loadWords: function(theWords) {
+				var i= 0;
+				var arrayOfKeys = [];
+
+				theWords.forEach(function(element){
+  					 i = i + 1;
+  					 element.index = "index"+i;
+  					 element.step = 0;
+  					 element.date = 0;
+  					 LW.db.put(LW.db.name+'-'+element.index, element);
+  					 arrayOfKeys.push(element.index);
+					}
+				);
+
+                                LW.db.put(LW.db.name + '-words', arrayOfKeys.join());
+                                LW.db.index = arrayOfKeys; 
+
+                                console.log(arrayOfKeys.length + " words loaded");
+
+		},
+
+
+
+
+
                 dumpWords: function(aKeyPrefix) {
 		           if (LW.db.isOK) {
                             var key;
