@@ -31,7 +31,7 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 		translates: [],
 		
 		recountTotal: function(){
-			$(Vocabulary.totalWordsNum).text(wordsIndex.length);
+			$(Vocabulary.totalWordsNum).text(LW.db.index.length);
 		},
 		
 		removeWord: function(self, notReindex){ //remove word from vocabulary
@@ -39,10 +39,10 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				node = $(self).data('node');
 			
 			if (!notReindex) {
-				wordsIndex.splice(id, 1); //remove from index
-				localStorageAPI.storeItem('learnWords-words', wordsIndex.join());
+				LW.db.index.splice(id, 1); //remove from index
+				LW.db.storeItem('learnWords-words', LW.db.index.join());
 			}
-			localStorageAPI.removeItem('learnWords-'+node); //remove this word
+			LW.db.removeItem('learnWords-'+node); //remove this word
 			$('#'+node).remove();
 			$('#'+node+'Edit').remove();
 			Vocabulary.recountTotal();
@@ -62,15 +62,21 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 		viewWord: function(){
 			var contentInner = '';
 			
-			$(wordsIndex).each(function(index, node){
-				var item = localStorageAPI.readItem('learnWords-'+node),
-					txt = item.word,
-					translate = item.translate;
+			$(LW.db.index).each(function(index, node){
+                                "use strict";
+                                var txt, translate;
+				var item = LW.db.readItem('learnWords-'+node);
+                                if (item) 
+                                   {
+				     txt = item.word;
+				     translate = item.translate;
 				
-				Vocabulary.words.push(txt);
-				Vocabulary.translates.push(translate);
-				contentInner +=	Vocabulary.rowTemplate.replace(/{{node}}/g,node).replace(/{{txt}}/g,txt).replace(/{{translate}}/g,translate).replace(/{{index}}/g,index);
+				     Vocabulary.words.push(txt);
+				     Vocabulary.translates.push(translate);
+				     contentInner +=	Vocabulary.rowTemplate.replace(/{{node}}/g,node).replace(/{{txt}}/g,txt).replace(/{{translate}}/g,translate).replace(/{{index}}/g,index);
+                                    }
 			});
+
 			
 			$(Vocabulary.vocabularyBox).html(contentInner);
 			Vocabulary.recountTotal();
@@ -107,13 +113,13 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				};
 
                                 // save newly added word
-                                newIndexVal = 'index'+(wordsIndex.length+1);
-				localStorageAPI.storeItem('learnWords-'+newIndexVal, word); 
+                                newIndexVal = 'index'+(LW.db.index.length+1);
+				LW.db.storeItem('learnWords-'+newIndexVal, word); 
 
-				var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? wordsIndex.length : wordsIndex.indexOf(inputWord));
+				var contentInner = Vocabulary.rowTemplate.replace(/{{node}}/g,todayDate).replace(/{{txt}}/g,inputWord).replace(/{{translate}}/g,inputTranslate).replace(/{{index}}/g,(addWord) ? LW.db.index.length : LW.db.index.indexOf(inputWord));
 				
 				if (addWord) {
-					wordsIndex.push(newIndexVal);
+					LW.db.index.push(newIndexVal);
 					wordTxt.val('');
 					translate.val('');
 					$(Vocabulary.errorVocabularyBox).removeClass('nodisplay');
@@ -122,12 +128,12 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 				} else {
 					var id = wordTxt.attr('id').slice(5);
 					
-					wordsIndex[wordsIndex.indexOf(id)] = newIndexVal;
+					LW.db.index[LW.db.index.indexOf(id)] = newIndexVal;
 					$('#' + id).before(contentInner);
 					Vocabulary.removeWord($('#del-' + id), true);
 				}
 				
-				localStorageAPI.storeItem('learnWords-words', wordsIndex.join()); //add word to Vocabulary list
+				LW.db.storeItem('learnWords-words', LW.db.index.join()); //add word to Vocabulary list
 				Utils.clearFields();
 				Vocabulary.recountTotal();
 				Learn.wordsLearn = [];

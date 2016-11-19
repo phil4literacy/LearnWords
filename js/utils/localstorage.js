@@ -9,9 +9,12 @@
 **************************************************/
 
 
-if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localStorageAPI){
-	
-	localStorageAPI = {
+// Define global LearnWords object
+var LW = {}; 
+
+
+// Define database sub-object
+LW.db = {
 	
 		isLocalStorageAvailable: function() {
 				try {
@@ -22,19 +25,19 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 			},
 		
 		readItem: function(key){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
 				return JSON.parse(localStorage.getItem( key ));
 			}
 		},
 		
 		removeItem: function(key){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
 				localStorage.removeItem( key );
 			}
 		},
 		
 		storeItem: function(key, value){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
 				try {
 					localStorage.setItem(key, JSON.stringify(value));
 				} catch (e) {
@@ -48,7 +51,7 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 
 
                 removeWords: function(){
-			if (localStorageAPI.isOK) {
+			if (LW.db.isOK) {
                         "use strict";
                         var key;
                         var st; 
@@ -84,7 +87,7 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 
 
                 dumpWords: function(aKeyPrefix) {
-		           if (localStorageAPI.isOK) {
+		           if (LW.db.isOK) {
                             "use strict";
                             var key;
                             var strValue; 
@@ -112,20 +115,19 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 
 		
 		init: function(){
-			localStorageAPI.isOK = false;
-			if (!localStorageAPI.isLocalStorageAvailable()) {
+			LW.db.isOK = false;
+			if (!LW.db.isLocalStorageAvailable()) {
 				alert('Local Storage is not available.');
 				return false;
-			}
-			localStorageAPI.isOK = true;
+			};
+                        // generate index
+                        LW.db.index = localStorage.getItem('learnWords-words').split(',');
+			LW.db.isOK = true;
 		}
 	};
 	
-	localStorageAPI.init();
-}
 
-
-// generate index
-var wordsIndex = localStorageAPI.readItem('learnWords-words').split(',');
+// initialize database sub-object
+LW.db.init();
 
 
