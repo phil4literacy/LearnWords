@@ -122,13 +122,13 @@ if(typeof(local) == 'undefined' || local == null || !local){
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
 			local.changeLocalContent();
-			localStorageAPI.storeItem('learnWords-language', local.currentLocal);
+			LW.db.storeItem('learnWords-language', local.currentLocal);
 			$(this).addClass('selected');
 			return false;
 		},
 		
 		init: function(){
-			local.currentLocal = localStorageAPI.readItem('learnWords-language');
+			local.currentLocal = LW.db.readItem('learnWords-language');
 			$(document).on('click touchstart', '[data-type=lang-select]', local.langSelect);
 		}
 	}
