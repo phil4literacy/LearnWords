@@ -298,8 +298,9 @@ Open 'Developer tools' in the browser and 'web console'.
 
 Execute
 
-    localStorageAPI.removeWords();
+    LW.db.removeWords();
 
-Then open ``index.html``. All your new words should appear in the 'Learn' mode.
+
+Then close the page and reopen ``index.html``. All your new words should appear in the 'Learn' mode.
 
 
