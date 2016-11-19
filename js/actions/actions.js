@@ -329,7 +329,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 						word : Learn.wordsLearn[Learn.currentIndex].word,
 						translate: Learn.wordsLearn[Learn.currentIndex].translate,
 						step: step,
-						date: (step == 1) ? (LW.Utils.getToday() + 864000000 * Settings.params.first) : 0
+						date: (step == 1) ? (LW.Utils.getToday() + LW.Utils.delay * Settings.params.first) : 0
 					};
 				
 				LW.db.put(LW.db.name+'-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
@@ -520,11 +520,11 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 			if (answer == ((Repeat.wordsRepeat.first.length) ? word.translate : word.word)){
                                 Repeat.answerWasCorrectFeedback(true);
 				word.step++;  // put word into next box
-				word.date = LW.Utils.getToday() + 864000000 * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
+				word.date = LW.Utils.getToday() + LW.Utils.delay * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
 			} else {
                                 Repeat.answerWasCorrectFeedback(true);
 				word.step--;  
-				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + 864000000 * Settings.params.first;
+				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + LW.Utils.delay * Settings.params.first;
 			};
 
 			//save word
@@ -575,7 +575,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.date = 0;
 			} else {
 				word.step--;
-				word.date = LW.Utils.getToday() + 864000000 * Settings.params.second;
+				word.date = LW.Utils.getToday() + LW.Utils.delay * Settings.params.second;
 			};
 			LW.db.put(LW.db.name+'-'+word.index, word); //save word
 			Repeat.wordsRepeat.third.splice(0, 1); //remove from index

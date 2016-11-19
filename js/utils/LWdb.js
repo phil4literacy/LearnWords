@@ -252,6 +252,6 @@
 	};
 
 
-	LW.db.init("learnWords");	
-	// LW.db.init("LWdb");
+	// LW.db.init("learnWords");	
+	LW.db.init("LWdb");
         // LW.db.init("LWtestDB");	

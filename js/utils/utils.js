@@ -72,7 +72,9 @@ if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
 		        a[i - 1] = a[j];
 		        a[j] = x;
 		    }		   
-		}	
+		},
+
+                delay: 864000000     //    Utils.delay = 24h * 60m * 60s * 100μs	
 	};
 }
 
