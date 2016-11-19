@@ -1,0 +1,30 @@
+{
+  "name": "LearnWords",
+  "description": "Leitner system based word learning app",
+  "main": "index.html",
+  "keywords": [
+    "learning_words",
+    "learning",
+    "vocabulary",
+    "spaced_repetiton",
+    "Leitner",
+    "language"
+  ],
+  "authors": [
+    "Anatol Marezhanyi",
+    "Hannes Hirzel"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/e1r0nd/LearnWords",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jasmine-core": "jasmine#^2.5.2"
+  }
+}
