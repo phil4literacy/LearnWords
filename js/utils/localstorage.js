@@ -77,6 +77,34 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 
 		},
 
+
+                dumpWords: function(aKeyPrefix) {
+		           if (localStorageAPI.isOK) {
+                            "use strict";
+                            var key;
+                            var strValue; 
+                            var result = [];
+
+                            var prefixForNumber = 'learnWords-index';  
+
+                            // go through all keys starting with the name
+                            // of the database, i.e 'learnWords-index14'
+                            // collect the matching objects into arr
+                            for (var i = 0; i < localStorage.length; i++){
+                                key = localStorage.key(i);
+                                strValue = localStorage.getItem(key);                            
+    
+                                if (key.lastIndexOf(prefixForNumber,0) === 0) {
+                                    result.push(JSON.parse(strValue));
+                                };
+			    };
+
+                            // Dump the array as JSON code (for select all / copy)
+                            console.log(JSON.stringify(result));
+                           }
+                },	
+
+
 		
 		init: function(){
 			localStorageAPI.isOK = false;
