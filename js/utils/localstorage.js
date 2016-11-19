@@ -142,8 +142,10 @@ LW.db = {
 				alert('Local Storage is not available.');
 				return false;
 			};
-                        // generate index
-                        LW.db.index = localStorage.getItem('learnWords-words').split(',');
+                        // get index
+                        LW.db.index = [];
+                        var strIndex = localStorage.getItem('learnWords-words');
+                        if (strIndex) {LW.db.index = strIndex.split(',')};
 			LW.db.isOK = true;
 		}
 	};

@@ -60,7 +60,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 						word : Learn.wordsLearn[Learn.currentIndex].word,
 						translate: Learn.wordsLearn[Learn.currentIndex].translate,
 						step: step,
-						date: (step == 1) ? (Utils.getToday() + 864000000 * Settings.params.first) : 0
+						date: (step == 1) ? (Utils.getToday() + Utils.delay * Settings.params.first) : 0
 					};
 				
 				LW.db.storeItem('learnWords-'+Learn.wordsLearn[Learn.currentIndex].index, word); //save word
