@@ -1,12 +1,22 @@
 /**************************************************
-* Learn Words // localstorage.js
-* coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
-* http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
-* Placed in public domain.
+* Learn Words // LWdb.js
 *
-* Update November 2016 by Hannes Hirzel
+* Database access
+*
+* Current API as of 19. Nov 2016
+* will be updated
+*
+* LW.db.get(key)
+* LW.db.put(key,value)
+* LW.db.remove(key)
+* LW.db.removeWords()
+* LW.db.removeDB()
+* LW.db.dumpWords()
+* LW.db.init()
+*
 *
 **************************************************/
+
 
 	// Define global LearnWords object
 	var LW = {}; 
@@ -50,6 +60,36 @@
 				}
 			}
 		},
+
+
+
+                dumpWords: function(aKeyPrefix) {
+		           if (LW.db.isOK) {
+                            "use strict";
+                            var key;
+                            var strValue; 
+                            var result = [];
+
+                            var prefixForNumber = 'learnWords-index';  
+
+                            // go through all keys starting with the name
+                            // of the database, i.e 'learnWords-index14'
+                            // collect the matching objects into arr
+                            for (var i = 0; i < localStorage.length; i++){
+                                key = localStorage.key(i);
+                                strValue = localStorage.getItem(key);                            
+    
+                                if (key.lastIndexOf(prefixForNumber,0) === 0) {
+                                    result.push(JSON.parse(strValue));
+                                };
+			    };
+
+                            // Dump the array as JSON code (for select all / copy)
+                            console.log(JSON.stringify(result));
+                           }
+                },	
+
+
 
 
 		removeWords: function(){
@@ -130,37 +170,6 @@
                         }
 
 		},
-
-
-
-
-
-
-                dumpWords: function(aKeyPrefix) {
-		           if (LW.db.isOK) {
-                            "use strict";
-                            var key;
-                            var strValue; 
-                            var result = [];
-
-                            var prefixForNumber = 'learnWords-index';  
-
-                            // go through all keys starting with the name
-                            // of the database, i.e 'learnWords-index14'
-                            // collect the matching objects into arr
-                            for (var i = 0; i < localStorage.length; i++){
-                                key = localStorage.key(i);
-                                strValue = localStorage.getItem(key);                            
-    
-                                if (key.lastIndexOf(prefixForNumber,0) === 0) {
-                                    result.push(JSON.parse(strValue));
-                                };
-			    };
-
-                            // Dump the array as JSON code (for select all / copy)
-                            console.log(JSON.stringify(result));
-                           }
-                },	
 
 
 		
