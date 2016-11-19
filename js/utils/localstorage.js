@@ -72,6 +72,12 @@ LW.db = {
 		},
 
 
+		isEmpty: function(key){
+			if (LW.db.isOK) {
+				if (LW.db.index.length == 0) {return true} else {return false};
+			}
+		},
+
                 removeWords: function(){
 			if (LW.db.isOK) {
                         "use strict";
