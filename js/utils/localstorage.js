@@ -1,9 +1,14 @@
 /**************************************************
-* Learn Words // localdtorage.js
+* Learn Words // localstorage.js
 * coded by Anatolii Marezhanyi aka e1r0nd//[CRG] - March 2014
 * http://linkedin.com/in/merezhany/ e1r0nd.crg@gmail.com
+*
+* Updated by Hannes Hirzel, November 2016
+*
 * Placed in public domain.
 **************************************************/
+
+
 if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localStorageAPI){
 	
 	localStorageAPI = {
@@ -118,4 +123,9 @@ if(typeof(localStorageAPI) == 'undefined' || localStorageAPI == null || !localSt
 	
 	localStorageAPI.init();
 }
+
+
+// generate index
+var wordsIndex = localStorageAPI.readItem('learnWords-words').split(',');
+
 
