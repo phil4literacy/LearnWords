@@ -217,13 +217,14 @@
                         var aKeyPrefix = LW.db.name;  
 
                         LW.db.removeObjects(aKeyPrefix);
+                        LW.db.index = null;
 
 		},
 
 
 		isEmpty: function(key){
 			if (LW.db.isOK) {
-				if (LW.db.index.length == 0) {return true} else {return false};
+				if (LW.db.index == null || LW.db.index.length == 0) {return true} else {return false};
 			}
 		},
 
