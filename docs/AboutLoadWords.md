@@ -287,12 +287,15 @@ LW.db.loadWords(
 
 ## Step 5
 
+Maybe you have to change ``index.html`` depending on the name you have chosen
+for the loadWords file.
+
 Now open the app by starting ``index.html``.
-If it is the first time you start the program your new memorystore.js
+If it is the first time you start the program your new data/loadWords-nn-mm.js
 code is loaded.
 
 If you have started ``index.html`` before the exiting content is not overwritten
-by the new memorystore.js file. To do so you have to reset the database first.
+by the new loadWords.js file. To do so you have to reset the database first.
 
 Open 'Developer tools' in the browser and 'web console'.
 
