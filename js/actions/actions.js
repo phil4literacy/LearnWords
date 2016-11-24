@@ -167,13 +167,15 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 			var contentInner = '';
 			
 			$(LW.db.index).each(function(index, node){
-				var item = LW.db.get(LW.db.name+'-'+node),
-					txt = item.word,
+				var item = LW.db.get(LW.db.name+'-'+node);
+				if(item){
+					var txt = item.word,
 					translate = item.translate;
 				
-				Vocabulary.words.push(txt);
-				Vocabulary.translates.push(translate);
-				contentInner +=	Vocabulary.rowTemplate.replace(/{{node}}/g,node).replace(/{{txt}}/g,txt).replace(/{{translate}}/g,translate).replace(/{{index}}/g,index);
+					Vocabulary.words.push(txt);
+					Vocabulary.translates.push(translate);
+					contentInner +=	Vocabulary.rowTemplate.replace(/{{node}}/g,node).replace(/{{txt}}/g,txt).replace(/{{translate}}/g,translate).replace(/{{index}}/g,index);
+				}
 			});
 			
 			$(Vocabulary.vocabularyBox).html(contentInner);
@@ -297,7 +299,7 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 			if (!Learn.wordsLearn.length) {
 				$(LW.db.index).each(function(index, node){ //the initial counting
 					var item = LW.db.get(LW.db.name+'-'+node);
-					if (item.step == 0) {
+					if (item && item.step == 0) {
 						Learn.wordsLearn.push(item);
 					}
 				});
@@ -421,7 +423,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				$(LW.db.index).each(function(index, node){ //the initial counting
 					var item = LW.db.get(LW.db.name+'-'+node);
 					
-					if (LW.Utils.getToday() > item.date) { //if this word is for today
+					if (item && LW.Utils.getToday() > item.date) { //if this word is for today
 						if (item.step == 1) {
 							Repeat.wordsRepeat.first.push(item);
 						} else if (item.step == 2) {
