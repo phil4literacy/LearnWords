@@ -1,9 +1,7 @@
 LearnWords
 ==========
 
-<i>Started - March 2014, Updates November 2016</i>
-
-One page app for words learning by Leitner system. Single developer.<br>
+<i>Started - March 2014.</i> One page app for words learning by Leitner system.<br>
 Developed with Twitter Bootstrap and jQuery. 
 
 - Responsive design, 
@@ -12,10 +10,10 @@ Developed with Twitter Bootstrap and jQuery.
 - HTML-templates, 
 - localization.
 
-Coded by Anatol Marezhanyi aka e1r0nd//[CRG]
 
-http://linkedin.com/in/merezhany/<br>
-a.merezhanyi@gmail.com
+## Contributors
+Anatol Marezhanyi https://github.com/e1r0nd <br>
+Hannes Hirzel https://github.com/hhzl<br>
 
 ## This fork
 

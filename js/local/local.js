@@ -124,8 +124,10 @@ if(typeof(LW.local) == 'undefined' || LW.local == null || !LW.local){
 			LW.local.current = $(this).data('lang');
 			$('#langSelect').click();
 			$('.navbar-toggle:visible').click();
+
 			LW.local.changeLocalContent();
 			LW.db.put(LW.db.name+'-language', LW.local.current);
+
 			$(this).addClass('selected');
 			return false;
 		},
