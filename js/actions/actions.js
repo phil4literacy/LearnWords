@@ -94,8 +94,8 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 		},
 		
 		init: function(){
-			$(document).on('click touchstart', '#saveSettings', Settings.saveSetting);
-			$(document).on('click touchstart', '#cancelSettings', Settings.cancelSetting);
+			$(document).on('click', '#saveSettings', Settings.saveSetting);
+			$(document).on('click', '#cancelSettings', Settings.cancelSetting);
 		}
 	};
 	
@@ -251,17 +251,17 @@ if(typeof(Vocabulary) == 'undefined' || Vocabulary == null || !Vocabulary){
 
 		
 		init: function(){
-			$(document).on('click touchstart', '#addBtn', function(){
+			$(document).on('click', '#addBtn', function(){
 				Vocabulary.addSaveWord($(Vocabulary.inputWordTxt), $(Vocabulary.inputTranslate), $(Vocabulary.addWordForm), true);
 			});
-			$(document).on('click touchstart', '.js-edit-btn', function(){
+			$(document).on('click', '.js-edit-btn', function(){
 				$('#'+$(this).data('node')).hide();
 				$('#'+$(this).data('node')+'Edit').show();
 			});
-			$(document).on('click touchstart', '.js-save-btn', function(){
+			$(document).on('click', '.js-save-btn', function(){
 				Vocabulary.addSaveWord($('#word-'+$(this).data('node')), $('#translate-'+$(this).data('node')), $('#form-'+$(this).data('node')));
 			});
-			$(document).on('click touchstart', '.js-del-btn', function(){
+			$(document).on('click', '.js-del-btn', function(){
 				Vocabulary.removeWord(this);
 			});
 		}
@@ -363,9 +363,9 @@ if(typeof(Learn) == 'undefined' || Learn == null || !Learn){
 		},
 		
 		init: function(){
-			$(document).on('click touchstart', '#rememberBtn', Learn.rememberWord);
-			$(document).on('click touchstart', '#repeatBtn', Learn.repeatWord);
-			$(document).on('click touchstart', '#knownBtn', Learn.knownWord);
+			$(document).on('click', '#rememberBtn', Learn.rememberWord);
+			$(document).on('click', '#repeatBtn', Learn.repeatWord);
+			$(document).on('click', '#knownBtn', Learn.knownWord);
 		}
 	};
 	
@@ -408,7 +408,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				answerType = "correct";
 			}
 			$('#feedback').html('<img src="media/symbols/' + answerType + '.png">');
-			Utils.playAudio("media/sound/" + answerType + ".mp3");
+			LW.Utils.playAudio("media/sound/" + answerType + ".mp3");
 
 			return true;
 		},
@@ -586,10 +586,10 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		},
 		
 		init: function(){
-			$(document).on('click touchstart', '[data-type=checkWordBtn]', function(){
+			$(document).on('click', '[data-type=checkWordBtn]', function(){
 				Repeat.checkWord(this)
 			});
-			$(document).on('click touchstart', '#enterBtn', Repeat.repeatWord);
+			$(document).on('click', '#enterBtn', Repeat.repeatWord);
 		}
 	};
 	
