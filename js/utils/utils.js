@@ -93,7 +93,8 @@ if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
 			}
 			my_media.play();
 		},
-        delay: 0     //    Utils.delay = 24h * 60m * 60s * 100μs	
+        delay: 8640000     //    Utils.delay = 24h * 60m * 60s * 100μs
+                           // Note: that the delay has been shortened to 1 day/100 for test purposes	
 	};
 }
 

@@ -14,7 +14,8 @@
 *
 * This will make it easier to do further changes.
 *
-* Update by Hannes Hirzel, November 2016
+* Update by Hannes Hirzel, November 2016 and
+*           phil4Literacy
 **************************************************/
 
 
