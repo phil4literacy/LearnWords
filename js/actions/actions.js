@@ -26,6 +26,7 @@ if(typeof(Settings) == 'undefined' || Settings == null || !Settings){
 		inputThirdCheck: $('#inputThirdCheck'),
 		settingFrom: $('#settingFrom'),
 		errorSettings: $('#errorSettings'),
+		loggingOn: true,
 		
 		params: {},
 	
@@ -401,7 +402,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 		answerWasCorrectFeedback: function(correct)
 		{
 			$('#feedback').show();
-			
+			LW.Utils.log("is correct: " + correct);
 			var answerType = "wrong";
 			if(correct)
 			{
@@ -521,7 +522,7 @@ if(typeof(Repeat) == 'undefined' || Repeat == null || !Repeat){
 				word.step++;  // put word into next box
 				word.date = LW.Utils.getToday() + LW.Utils.delay * Settings.params[(Repeat.wordsRepeat.first.length) ? 'second' : 'third'];
 			} else {
-                                Repeat.answerWasCorrectFeedback(true);
+                                Repeat.answerWasCorrectFeedback(false);
 				word.step--;  
 				word.date = (Repeat.wordsRepeat.first.length) ? 0 : LW.Utils.getToday() + LW.Utils.delay * Settings.params.first;
 			};

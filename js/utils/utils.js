@@ -62,7 +62,12 @@ if(typeof(LW.Utils) == 'undefined' || LW.Utils == null || !LW.Utils){
 		    
 		    console.log(out);
 		},	
-
+		log: function(message) {
+			if(Settings.loggingOn)
+			{
+				console.log(message);
+			}
+		},
 
 		shuffle: function(a) {
 			 var j, x, i;
